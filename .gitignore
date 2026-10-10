@@ -1,0 +1,18 @@
+/node_modules/
+/.sites-runtime/
+/.env*
+/outputs/
+/.wrangler/
+__pycache__/
+
+# Local tooling, credentials and generated verification artifacts
+.env*
+*.log
+*.py[cod]
+.DS_Store
+Thumbs.db
+/.venv/
+/venv/
+/work/
+/Sea-Railway-v*.html
+/Sea-Railway-v*-gallery.zip

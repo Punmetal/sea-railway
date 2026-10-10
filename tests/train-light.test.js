@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {registerHooks} from 'node:module';
+import * as THREE from '../dist/vendor/three.module.js';
+registerHooks({resolve(s,c,n){return s==='three'?{url:new URL('../dist/vendor/three.module.js',import.meta.url).href,shortCircuit:true}:n(s,c);}});
+const {createTrainLights}=await import('../dist/train-light.js'),{PhotoProcessor,PHOTO_DEFAULTS}=await import('../dist/photo-effects.js'),{RailwayPhoto}=await import('../dist/photo-mode.js');
+const scene=new THREE.Scene(),cars=[new THREE.Group(),new THREE.Group()];
+cars.forEach((c,i)=>{const model=new THREE.Group();model.name='reference-train-model';model.rotation.y=i*Math.PI;c.add(model);c.position.set(25, .22,30-i*18.75);c.rotation.y=.75;scene.add(c);});
+const materials={headlight:new THREE.MeshStandardMaterial()},water={material:new THREE.ShaderMaterial({fragmentShader:'void main(){vec3 waves=vec3(0.);vec3 col=vec3(0.);col*=mix(.83,1.,getShadowMask());}'})};
+const headlights=createTrainLights({cars,materials,water});
+const weather={mist:0,rain:0,snow:0},day={lamps:.08},evening={lamps:.52},night={lamps:1};
+headlights.update(day,weather,{speed:6});assert(headlights.beams.every(b=>!b.mesh.visible&&b.light.intensity===0));
+headlights.update(evening,weather,{speed:6});const dusk=headlights.waterUniforms.uHeadStrength.value;assert(dusk>.2&&dusk<1);assert(headlights.beams[0].mesh.visible&&!headlights.beams[1].mesh.visible);
+headlights.update(night,weather,{speed:6});assert.equal(headlights.waterUniforms.uHeadStrength.value,1);assert(materials.headlight.emissiveIntensity>4);
+const expected=cars[0].getObjectByName('reference-train-model').localToWorld(new THREE.Vector3(0,4.215,8.08));assert(expected.distanceTo(headlights.waterUniforms.uHeadSource.value)<1e-6,'The cone starts at the actual roof-mounted lamp.');
+const forward=headlights.waterUniforms.uHeadForward.value.clone();headlights.update(night,weather,{speed:-6});assert(headlights.beams[1].mesh.visible&&!headlights.beams[0].mesh.visible);assert(forward.dot(headlights.waterUniforms.uHeadForward.value)<-.99,'Reverse travel uses the outward rear cab.');
+headlights.update(night,weather,{speed:0});assert(headlights.beams[1].mesh.visible,'Stopping preserves the active cab.');
+const matrix=headlights.beams[1].uniforms.uBeamMatrix.value.clone();headlights.update(night,weather,{speed:0});assert(matrix.equals(headlights.beams[1].uniforms.uBeamMatrix.value),'Frozen/parked beams are stable.');
+const strength=headlights.beams[1].uniforms.uBeamAir.value;headlights.update(night,{mist:1,rain:1,snow:0},{speed:0});assert(headlights.beams[1].uniforms.uBeamAir.value>strength);
+assert(water.material.fragmentShader.includes('headlightOnWater(vWorld'));assert(headlights.beams.every(b=>b.mesh.material.depthWrite===false&&b.mesh.material.side===THREE.BackSide));
+assert.equal(headlights.beams.filter(b=>b.light.castShadow).length,1);headlights.setQuality('low');assert.equal(headlights.beams[1].light.shadow.mapSize.x,256);headlights.setQuality('high');assert.equal(headlights.beams[1].light.shadow.mapSize.x,512);
+let target=null,calls=[];const renderer={toneMappingExposure:1.125,domElement:{width:3000,height:1800},capabilities:{maxSamples:4},getDrawingBufferSize:v=>v.set(3000,1800),getRenderTarget:()=>target,setRenderTarget:t=>{target=t;},render(s){calls.push({scene:s,target,material:s.children[0]?.material});}};
+const processor=new PhotoProcessor(renderer,{worldGlow:.82,maxEdge:1920,blurScale:.25}),rect={x:0,y:0,width:3000,height:1800},state={filter:'original',settings:{...PHOTO_DEFAULTS},comparing:false};
+processor.render(scene,new THREE.PerspectiveCamera(),state,rect);assert.equal(calls.length,4,'One scene render, two reduced blur passes and one composite.');assert.equal(processor.world.width,1920);assert.equal(processor.blurA.width,480);assert.equal(processor.uniforms.uWorldGlow.value,.82);assert.equal(target,null);
+for(const comparing of [true,false]){calls=[];processor.render(scene,new THREE.PerspectiveCamera(),{...state,filter:'moonlit',settings:{...PHOTO_DEFAULTS,intensity:0,bloom:80},comparing},rect);assert.equal(calls.length,4);assert.equal(processor.uniforms.uWorldGlow.value,.82);assert.equal(processor.uniforms.uCompare.value,Number(comparing));}
+let disposed=0;processor.world.addEventListener('dispose',()=>disposed++);const photo=new RailwayPhoto({renderer,scene,camera:new THREE.PerspectiveCamera(),orbit:{target:new THREE.Vector3()},root:cars[0],processor});photo.render();assert.equal(photo.processor,null,'Photo and game share one HDR allocation.');photo.dispose();assert.equal(disposed,0,'Photo does not dispose the shared game renderer.');
+const sentinel=new THREE.WebGLRenderTarget(1,1);target=sentinel;let n=0;renderer.render=()=>{if(++n===3)throw Error('blur failed');};assert.throws(()=>processor.render(scene,new THREE.PerspectiveCamera(),state,rect),/blur failed/);assert.equal(target,sentinel);assert.equal(processor.quad.material,processor.material);assert.equal(renderer.toneMappingExposure,1.125);
+headlights.dispose();processor.dispose();assert.equal(disposed,1);assert(!cars[0].getObjectByName('headlight-beam-0'));console.log('Train lights: actual lamp placement, dusk/day/night, reverse/stop, weather density, water footprint, shared HDR bloom, Original comparison, quality budgets and failure cleanup passed.');

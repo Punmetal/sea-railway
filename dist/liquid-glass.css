@@ -1,0 +1,132 @@
+/* Sea-tinted glass: static optical layers keep the live scene inexpensive. */
+:root{
+ --glass-ink:#fffaf0;
+ --glass-muted:#edf2f5;
+ --glass-edge:rgba(235,248,255,.32);
+ --glass-surface:linear-gradient(145deg,rgba(232,248,255,.19),rgba(200,229,245,.04) 40%,rgba(255,226,193,.09)),rgba(17,34,53,.80);
+ --glass-shadow:inset 0 1px 0 rgba(255,255,255,.48),inset 0 -1px 0 rgba(226,240,255,.12),inset 1px 0 0 rgba(255,255,255,.13),0 12px 36px rgba(9,22,38,.22);
+ --glass-selected:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,237,201,.85));
+}
+.control-center,.photo-panel,.view-switch,.transport-controls,.control-opener,
+#interaction-action,#capture-look,.station-actions button,#touch-walk button{
+ background:var(--glass-surface);
+ border:1px solid var(--glass-edge);
+ box-shadow:var(--glass-shadow);
+ -webkit-backdrop-filter:blur(22px) saturate(135%);
+ backdrop-filter:blur(22px) saturate(135%);
+ color:var(--glass-ink);
+}
+.control-center,.photo-panel{
+ border-radius:28px;
+ background:linear-gradient(145deg,rgba(235,249,255,.18),rgba(219,237,255,.03) 42%,rgba(255,225,186,.07)),rgba(16,31,48,.80);
+ scrollbar-color:rgba(231,243,249,.4) transparent;
+}
+.control-opener{border-radius:50%;transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+.control-opener svg{fill:#7293a3;stroke:#fffaf0;filter:drop-shadow(0 1px 2px #14263880)}
+.control-opener.active{background:var(--glass-selected);color:#263b4b;box-shadow:var(--glass-shadow),0 0 20px #fff0d520}
+.control-opener.active svg{fill:#fff0d5;stroke:#263b4b;filter:none}
+.control-heading,.photo-panel .panel-heading,.photo-export{
+ background:linear-gradient(135deg,rgba(238,249,255,.11),rgba(255,233,206,.035)),rgba(19,36,54,.82);
+ -webkit-backdrop-filter:blur(18px) saturate(125%);
+ backdrop-filter:blur(18px) saturate(125%);
+ border-color:rgba(238,249,255,.17);
+}
+.control-heading{margin-inline:-18px;padding-inline:18px;border-radius:27px 27px 0 0}
+.control-eyebrow{font-size:.75rem;letter-spacing:.12em;color:var(--glass-muted)}
+.control-heading h2{font-size:1.5rem;margin-top:4px}
+.control-section{border-color:rgba(231,244,255,.14)}
+.control-section summary{min-height:56px;border-radius:14px;transition:background .2s ease}
+.control-section summary:hover{background:rgba(246,251,255,.055)}
+.section-symbol{color:#f4ddbc}.section-chevron{color:var(--glass-muted)}
+.control-center .times,.view-switch,.transport-controls{border-radius:999px;padding:5px;gap:4px}
+.control-center .times{background:rgba(6,22,39,.18);border-color:rgba(236,248,255,.16);box-shadow:inset 0 1px 5px #071a2920;backdrop-filter:none}
+.control-center .times button,.view-switch button,.transport-controls button{border-radius:999px;min-height:44px;font-size:.875rem;transition:background .2s ease,box-shadow .2s ease,color .2s ease}
+.control-center .times button.active,.view-switch button.active,.transport-controls button.active,
+.control-center .weather-choices button.active,.control-mixer .sound-row-title button.active,
+.control-photo,.primary-action,.photo-tools button[aria-pressed=true]{
+ background:var(--glass-selected)!important;color:#243a49;
+ box-shadow:inset 0 1px 0 #fff, inset 0 -1px 0 #bd9c6940,0 3px 10px #08172520;
+ border-color:rgba(255,255,255,.75);
+}
+.view-switch button:not(.active):hover,.transport-controls button:not(.active):hover,
+.control-center button:not(.active):hover,.photo-tools button:hover{background:rgba(248,253,255,.12)}
+.control-heading>button,.photo-panel .panel-heading button,.photo-tools button,
+.control-mixer .sound-row-title button,.control-center .weather-choices button{
+ border:1px solid rgba(242,252,255,.21);background:linear-gradient(150deg,#f5fcff12,#f5fcff04);
+ box-shadow:inset 0 1px 0 #ffffff1a;border-radius:15px;
+}
+.control-center .weather-choices{gap:6px}
+.control-center .weather-choices button{font-size:.875rem;line-height:1.4;white-space:normal}
+.control-switch{padding:9px 5px;border-radius:15px}
+.control-switch small{font-size:.75rem;color:var(--glass-muted)}
+.control-switch.active{color:#fff0d5}
+.switch-track{width:42px;height:26px;border-color:#eaf7ff40;background:#071d354d;box-shadow:inset 0 2px 5px #04172535,inset 0 1px 0 #fff2}
+.switch-track:after{top:3px;left:3px;width:18px;height:18px;background:linear-gradient(145deg,#f8fdff,#acbfcb);box-shadow:0 2px 5px #0a1c3b45}
+.control-switch.active .switch-track{background:linear-gradient(135deg,#ffe8b9c9,#efce93a6);border-color:#fff0cd9e}
+.control-switch.active .switch-track:after{background:linear-gradient(145deg,#fffdf7,#ffedce);transform:translateX(16px)}
+.control-center .panel-choice input[type=checkbox],.photo-panel .panel-choice input[type=checkbox]{
+ appearance:none;-webkit-appearance:none;position:relative;width:42px;height:26px;flex-shrink:0;margin:0;
+ border:1px solid #eaf7ff40;border-radius:999px;background:#071d354d;cursor:pointer;
+ box-shadow:inset 0 2px 5px #04172535;transition:background .2s ease;
+}
+.panel-choice input[type=checkbox]:after{
+ content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;
+ background:linear-gradient(145deg,#f8fdff,#acbfcb);box-shadow:0 2px 5px #0a1c3b45;transition:transform .2s ease;
+}
+.control-center .panel-choice input[type=checkbox]:checked,.photo-panel .panel-choice input[type=checkbox]:checked{background:linear-gradient(135deg,#ffe8b9c9,#efce93a6);border-color:#fff0cd9e}
+.panel-choice input[type=checkbox]:checked:after{transform:translateX(16px);background:linear-gradient(145deg,#fffdf7,#ffedce)}
+.panel-choice:has(input[type=checkbox]){min-height:44px;cursor:pointer}
+.panel-choice input[type=checkbox]:focus-visible{outline:2px solid #ffe2a1;outline-offset:4px}
+.control-status{background:rgba(8,25,41,.22);border:1px solid #e8f6ff12;border-radius:12px;font-size:.875rem!important;color:var(--glass-muted)!important}
+.control-center .panel-note,.photo-panel .panel-note{font-size:.75rem;line-height:1.7;color:var(--glass-muted)}
+.control-center #saved-status{color:#f0dfc3}
+.control-center .panel-choice select,.photo-panel .panel-choice select{
+ font-size:.875rem;border-radius:13px;background:linear-gradient(145deg,#eefaff0d,#eefaff04),#20384ac7;
+ border:1px solid #e9f7ff38;color:var(--glass-ink);box-shadow:inset 0 1px 0 #fff1;
+}
+.panel-choice select option{color:#fffaf0;background:#20384a}
+.control-center .panel-choice>span,.photo-panel .panel-choice>span{flex:1;min-width:0;overflow-wrap:anywhere}
+.control-center .panel-choice select,.photo-panel .panel-choice select{min-width:0;max-width:55%}
+.control-center .times button{white-space:normal;line-height:1.5}
+.control-photo,.primary-action{border:1px solid #fff9;border-radius:16px;min-height:46px}
+.photo-panel .photo-lens,.photo-tools button{font-size:.875rem}
+.photo-lens output,.control-mixer .sound-level output{font-size:.875rem;color:#f9e6c6}
+.photo-details{border-color:#e8f6ff24}.photo-details summary{color:#fff1d7}
+.photo-export{border-radius:0 0 27px 27px}
+.photo-panel .panel-heading{border-radius:27px 27px 0 0}
+.photo-panel .panel-heading strong{font-weight:500}
+.control-mixer input[type=range],.photo-lens input[type=range]{accent-color:#f4dcb1;min-height:44px}
+.control-mixer input[type=range]::-webkit-slider-runnable-track,.photo-lens input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:#c6e2ed52;border:1px solid #edfaff2b}
+.control-mixer input[type=range]::-webkit-slider-thumb,.photo-lens input[type=range]::-webkit-slider-thumb{margin-top:-5px}
+.bottom-area{gap:9px}.view-switch,.transport-controls{box-shadow:var(--glass-shadow)}
+#controls-hint,#train-status{text-shadow:0 1px 4px #071b35,0 0 12px #071b3566}
+#interaction-action,#capture-look,.station-actions button{border-radius:22px;min-height:44px}
+#touch-walk button{min-width:44px;min-height:44px;border-radius:16px}
+#capture-look span{font-size:.875rem;opacity:.85}
+button:disabled{cursor:default;opacity:.55}
+/* Less blur on the existing low preset, without changing its glass styling. */
+body[data-quality="low"] .control-center,body[data-quality="low"] .photo-panel{-webkit-backdrop-filter:blur(12px) saturate(115%);backdrop-filter:blur(12px) saturate(115%)}
+body[data-quality="low"] .control-opener,body[data-quality="low"] .view-switch,body[data-quality="low"] .transport-controls{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+body[data-quality="low"] .control-heading,body[data-quality="low"] .photo-panel .panel-heading,body[data-quality="low"] .photo-export{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(19,36,54,.94)}
+@media(max-width:720px){
+ .control-heading{margin-inline:-15px;padding-inline:15px}
+ .control-center,.photo-panel{border-radius:24px}
+ .control-heading,.photo-panel .panel-heading{border-radius:23px 23px 0 0}
+ .photo-export{border-radius:0 0 23px 23px}
+ .control-center .times button{font-size:.875rem;gap:4px}
+ .view-switch button{padding-inline:14px}
+ .control-center .times{flex-wrap:wrap}.control-center .times button{flex:1 1 28%}
+ .view-switch{max-width:100%;white-space:normal}.view-switch button{flex:1;min-width:0;line-height:1.5}
+}
+@media(max-width:360px){.control-center .weather-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.control-center .times button{gap:3px}.control-center .times button>span:first-child{font-size:1rem}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .control-center,.photo-panel,.view-switch,.transport-controls,.control-opener,#interaction-action,#capture-look,.station-actions button,#touch-walk button{background:linear-gradient(145deg,#334b5c,#1b3046);}
+ .control-opener.active{background:var(--glass-selected)}
+}
+@media(prefers-reduced-transparency:reduce){
+ .control-center,.photo-panel,.view-switch,.transport-controls,.control-opener,#interaction-action,#capture-look,.station-actions button,#touch-walk button{background:linear-gradient(145deg,#334b5c,#1b3046);-webkit-backdrop-filter:none;backdrop-filter:none}
+ .control-opener.active{background:var(--glass-selected)}
+}
+@media(prefers-reduced-motion:reduce){
+ .control-opener,.control-section summary,.control-center button,.view-switch button,.transport-controls button,.panel-choice input[type=checkbox],.panel-choice input[type=checkbox]:after{transition:none}
+}

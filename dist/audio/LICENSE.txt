@@ -1,0 +1,10 @@
+Quiet Tide — original Sea Railway soundtrack, 2026.
+Composition and recording produced specifically for this project using procedural synthesis.
+No third-party music, recordings, loops or samples are included.
+
+To the extent possible under law, the creators have waived all copyright and related
+or neighboring rights to this composition and recording under CC0 1.0 Universal.
+You may use, copy, modify and redistribute the audio, including commercially.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The reproducible composition source is scripts/compose-lofi.py in the project repository.

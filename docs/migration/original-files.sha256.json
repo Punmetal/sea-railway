@@ -1,0 +1,632 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 74,
+    "sha256": "7acee325d10a14700b6f35c3d2fe24b1684a6d62b03e6498194b020bc10b9099",
+    "git_blob_sha": "0eef09cfc26d2fd145512a4b3d2a36fe758176bf"
+  },
+  {
+    "path": ".openai/hosting.json",
+    "bytes": 88,
+    "sha256": "2cbb8494390fa5189a7c2cb9553e98893b407aab3e4c32f0a0f496b664013417",
+    "git_blob_sha": "81a17f480c8d45ffee59f813a2914184f03c3e8c"
+  },
+  {
+    "path": "QA.md",
+    "bytes": 6274,
+    "sha256": "9a5b2d8023a9b055555029e1f88a991ec988da2faf4d09998d640624c3bb9d93",
+    "git_blob_sha": "1e18872bea3fb2173a5365a7aaf367950008f46d"
+  },
+  {
+    "path": "README.md",
+    "bytes": 55493,
+    "sha256": "0d700ce8f2265ae9210d848af0d21a898f3e052014ae3dbdaad2968a94384965",
+    "git_blob_sha": "7143fce51d8c6c49c60b16be223c9bafc7f9ea58"
+  },
+  {
+    "path": "dist/ambience.js",
+    "bytes": 7366,
+    "sha256": "326fbcd85550ef3ccd22966777c138ba5821c3281c793f48cfd225606b735702",
+    "git_blob_sha": "bd9579d7015e12054a2d1aee8b08abed38793c5d"
+  },
+  {
+    "path": "dist/assets/painted-sky.png",
+    "bytes": 1572949,
+    "sha256": "5f02f5c23da47a9ae3e1ad32c6b8fd94a0721b43e21152981e20c79229608f8d",
+    "git_blob_sha": "3223cd19148e8c8d5d9a713b0ea0cd856332296c"
+  },
+  {
+    "path": "dist/audio/LICENSE.txt",
+    "bytes": 599,
+    "sha256": "e600e3079dfb180c9bd588efd5d8165ba6b8b12f86e27be18f28898bb5d557f4",
+    "git_blob_sha": "a7a96fa9f06060044bf6f322363b933e66790d2b"
+  },
+  {
+    "path": "dist/aurora.js",
+    "bytes": 1190,
+    "sha256": "f5181bba795933a47611b9b66fb26535e1a85028657e93d4d3b2d05403dcd4b7",
+    "git_blob_sha": "bc28cf16b9e58a9c0bc391f5e4079d91ab7d6285"
+  },
+  {
+    "path": "dist/birds.js",
+    "bytes": 3590,
+    "sha256": "65d0585af6e40d00846ae6ac19a2f52895a69edc96bb413de00f364fce6fba96",
+    "git_blob_sha": "e186c205e1471785e08762e702c6faccc039a94b"
+  },
+  {
+    "path": "dist/boarding-connection.js",
+    "bytes": 2363,
+    "sha256": "ea5a8285956a5b20517fc66a870343e8261363264d04412759a5f8acc89ff21e",
+    "git_blob_sha": "048f4892c128bc4cdc6298232b499245423ad8e5"
+  },
+  {
+    "path": "dist/chihiro.js",
+    "bytes": 15776,
+    "sha256": "fc902001d25b4b7b8628996154742e671a43478a284ef8a58fcfdccd38422077",
+    "git_blob_sha": "659666f93dd0c70b286b62a45f3ec54df9867677"
+  },
+  {
+    "path": "dist/cinematic-camera.js",
+    "bytes": 4123,
+    "sha256": "063e5ab498e94d909f2f87e1d00aca5e853fce32e01eb5b5338c60bf43ce5572",
+    "git_blob_sha": "448754a3442260dcb6ec88a58420233398fa199d"
+  },
+  {
+    "path": "dist/clouds.js",
+    "bytes": 1861,
+    "sha256": "479137a0ad91140214b3c0d6b1d5dea4bc836625b7b7f922e4f1116d758789c8",
+    "git_blob_sha": "cf540803946966e59535245ca5be4f75f4aad760"
+  },
+  {
+    "path": "dist/control-center.js",
+    "bytes": 2448,
+    "sha256": "5c24d1430e3539a64eb4d302daeb0445f4306df592a67bfab08957581a5669e7",
+    "git_blob_sha": "491a1ae8db3b43e9aea0626b36b16c6f177e357a"
+  },
+  {
+    "path": "dist/far-landscape.js",
+    "bytes": 1415,
+    "sha256": "056b32822c49b1f944d23ac10785ecae581fd7f3dc36fba5d5460457af1b43ce",
+    "git_blob_sha": "597d34965cece7c29ed0fc859443abe4432c16e6"
+  },
+  {
+    "path": "dist/foliage.js",
+    "bytes": 4543,
+    "sha256": "fc9b1a37ab82fbe309fa4e83e0b3a36bec70d10f44a53b402411aabb95f3c59e",
+    "git_blob_sha": "9003a3f18b45d9010cae5f45cc75132c833b2eb6"
+  },
+  {
+    "path": "dist/image-quality.js",
+    "bytes": 1574,
+    "sha256": "e7f749f11a6d8d0342ccc2fa94f8981589420a46a6eebf78a8121b3b370a2d64",
+    "git_blob_sha": "8b21fc7ca94177feb98bef71ee4a1b343c9823da"
+  },
+  {
+    "path": "dist/index.html",
+    "bytes": 22009,
+    "sha256": "b853cb2a512e99ccbb7f8614e72a0deb7f03f7c1e8ab1179bef29a74b4fdadfe",
+    "git_blob_sha": "d3592d6a23bba445bc4fafb11fd56200204c5070"
+  },
+  {
+    "path": "dist/interactions.js",
+    "bytes": 2791,
+    "sha256": "4e6383c8ec622a4586465fba3b37e3864f1a31298e744bb289c48b7d6bdc4733",
+    "git_blob_sha": "ba8dee3621a73333c8eb8ccdcc71662a6d3f023e"
+  },
+  {
+    "path": "dist/interior-layout.js",
+    "bytes": 1371,
+    "sha256": "69d79e4d42b35ae528866033939f03ecbca2144ab779bf0521de482ee853fe17",
+    "git_blob_sha": "2e7a7046e853b81bf3d8564bed4fa314a2a26872"
+  },
+  {
+    "path": "dist/interior-life.js",
+    "bytes": 4441,
+    "sha256": "692ec61957b7af73357240e854db26a332cf8323210100f30231f64865388ccd",
+    "git_blob_sha": "f0e3f08bcee657c4211364312422ccab070db30c"
+  },
+  {
+    "path": "dist/interior-stories.js",
+    "bytes": 3025,
+    "sha256": "cc7418c94efc4b6e1c5b17d9bb806cf9f72685b7bc790a24d6c6b09337360b9e",
+    "git_blob_sha": "84055cce21a75772a9e4bef99b13535f886facfc"
+  },
+  {
+    "path": "dist/journey-hints.js",
+    "bytes": 3515,
+    "sha256": "ca38c834cd5c30c3063cfd558014d0612579070ae1fa389f1b73938f943f8e39",
+    "git_blob_sha": "eee83ce10f4c90f68ec2c25f7de4ff6e903682d2"
+  },
+  {
+    "path": "dist/journey-memory.js",
+    "bytes": 3968,
+    "sha256": "3c8fb047259e90f7d8aeb53d6e2147f2e7a69dd9baef63606f894f0312145c3d",
+    "git_blob_sha": "8d0d3e167af16440eed921d7924be3c22a69cf0f"
+  },
+  {
+    "path": "dist/journey-settings.js",
+    "bytes": 2849,
+    "sha256": "a08aa6808af59b0df2a44d26291785f2da2aa145e831672f4b79468982a88374",
+    "git_blob_sha": "3d792c3c381acf76a9c4d15a8f7e649661599d1e"
+  },
+  {
+    "path": "dist/journey-start.js",
+    "bytes": 2479,
+    "sha256": "90148a4a368a9d74ff6543b25aaad66e36ec0636407431f36bca6e18b992d2eb",
+    "git_blob_sha": "717f17fdf52b56dbba13b25c9cdc91b7b141d3da"
+  },
+  {
+    "path": "dist/journey-ui.css",
+    "bytes": 4452,
+    "sha256": "f2dbb91c65708fce0e89438e16d14306e2908e24b68540541e58cea57b8480d0",
+    "git_blob_sha": "3c04247236c2bf0337e2d70367f84f07e5b41705"
+  },
+  {
+    "path": "dist/liquid-glass.css",
+    "bytes": 10231,
+    "sha256": "bf8b78896b0576f04b556292e42e7238f381b0114a4038faf6901e6edbe0dfd1",
+    "git_blob_sha": "e4296441a9c4c5a97f2992e323cad9bd238511df"
+  },
+  {
+    "path": "dist/main.js",
+    "bytes": 78702,
+    "sha256": "90875380582f2707264c611119c83f6dca15ceed900fb6574594cd2f022663a6",
+    "git_blob_sha": "255a6f6fed98b30b650da6c2803e2f0f63d1f286"
+  },
+  {
+    "path": "dist/music.js",
+    "bytes": 2322,
+    "sha256": "fdee261b76eb53e851a77c5cc9cecb9a8a7a5d0bd8340d97b7fa7278454c2a29",
+    "git_blob_sha": "c1bebf1835c597716f043cfadd32a9ae367c909a"
+  },
+  {
+    "path": "dist/no-face.js",
+    "bytes": 7238,
+    "sha256": "d39df679fae1901086a281cf69c43ce69a73d4c7ba17e9958c1551c117d44d33",
+    "git_blob_sha": "2febedf9e8c6e7ab656bc6f2e062d8e537a47950"
+  },
+  {
+    "path": "dist/painted-sky.js",
+    "bytes": 4503,
+    "sha256": "0c78ea40ebbf7e8201ba854e0238258bbc2ce8a81fa444e7cbba17760e014e78",
+    "git_blob_sha": "a8388a85645fe74f8f11ef417ac2c3dd03ce4aee"
+  },
+  {
+    "path": "dist/photo-effects.js",
+    "bytes": 10433,
+    "sha256": "a48d06d3268e56c5c9d40d4fbf4c2595dbcd5164a6cff3ec86dd256f3f8096c5",
+    "git_blob_sha": "5fd5ae3a4969b98e32de5772799b1bb24986a12d"
+  },
+  {
+    "path": "dist/photo-layout.js",
+    "bytes": 1427,
+    "sha256": "4b361b7f93346dfab822a15ae73fcfce9f2b9f783f2234836b20a5d1a723a8d5",
+    "git_blob_sha": "dd2238143d9f3f5ee2967e861b4469d4e5fe17f5"
+  },
+  {
+    "path": "dist/photo-mode.js",
+    "bytes": 7961,
+    "sha256": "a598a9cf5f936a5d6ce4c1abde1879bc25fdc83086b2fb071bd7b7259a5c8065",
+    "git_blob_sha": "258a15fc50a895b1232762cfd915ac62adc79dbe"
+  },
+  {
+    "path": "dist/physics.js",
+    "bytes": 3349,
+    "sha256": "805a9899fabf3c3de3b8ffd3558f4b7b9f11d8fc69926cb1e56c2827ab4fdadc",
+    "git_blob_sha": "748d7491a06f67824070ff18cf12f54385440249"
+  },
+  {
+    "path": "dist/quiet-events.js",
+    "bytes": 3232,
+    "sha256": "5ff468f8db62b61bdb097a50dd55ecc9078b6020f5e51d2b2dd8589d711dda50",
+    "git_blob_sha": "99541b00496080b7bffa0c752449ef646c95cad8"
+  },
+  {
+    "path": "dist/quiet-passenger.js",
+    "bytes": 5554,
+    "sha256": "69daecb2c50e49186b725d19f6159e59fc17cbc9057edc1d2a4d759a15052d91",
+    "git_blob_sha": "e52870d239d72c8fa83817edf08d95a16465c344"
+  },
+  {
+    "path": "dist/rain.js",
+    "bytes": 8839,
+    "sha256": "45273765f6e90ae1817eb6a6f48023e588db79928b8a5bd1b00733f53ce62eee",
+    "git_blob_sha": "777b73917e12100f4e779b4eef8bcee8feabc032"
+  },
+  {
+    "path": "dist/route-vistas.js",
+    "bytes": 8208,
+    "sha256": "00ee450b83adb823d021d7997295a2c9358c8bbef09d16a2fbe15236d202b152",
+    "git_blob_sha": "04471fd649ae1e33eb0039eaac94f83df9b60155"
+  },
+  {
+    "path": "dist/scenery-detail.js",
+    "bytes": 5655,
+    "sha256": "5ab37e940e406fc80b0263a59cd8db27c2d726aba348442ebe73e690e1c1202e",
+    "git_blob_sha": "6e21dbadb4c4af21f1a7aedba6da4f96764e6dcd"
+  },
+  {
+    "path": "dist/scenery.js",
+    "bytes": 16050,
+    "sha256": "5b2d9f5d1a7b96fd4914013bada2cc9643d323a711a0a72403415fa76c763e3a",
+    "git_blob_sha": "8f70a6071451eec0670bceb8273cfe9391630dc2"
+  },
+  {
+    "path": "dist/sea-water.js",
+    "bytes": 9815,
+    "sha256": "3867bc718da71743f2c9cd62b2b5487b145c306591072b68809c0d8a608372ea",
+    "git_blob_sha": "10731148afaa166c8a75b4ee571b8af4cc5d1353"
+  },
+  {
+    "path": "dist/shallows.js",
+    "bytes": 7484,
+    "sha256": "fe35f554e58549d8f3c582c8d17527cff10160bd30ad0f479f7ea88e6b03f115",
+    "git_blob_sha": "f3f88142e1986fbe71a0e2b3ae66003df04579a9"
+  },
+  {
+    "path": "dist/showcase.js",
+    "bytes": 7727,
+    "sha256": "4389d3882c815fc25ed303de0b8cb92d66a838fcd2e6119355b0b5841f4c50b1",
+    "git_blob_sha": "ecd928925664e7c36c6b1567734eb47d1e49c4bc"
+  },
+  {
+    "path": "dist/snow-cover.js",
+    "bytes": 4393,
+    "sha256": "2ae038293c1dccca18bbcc6a5739883bcaa24a32f2bccc8dc9e300d8da5441aa",
+    "git_blob_sha": "a79971d9fc3f8819f80d3a240cadac54fe26cc4b"
+  },
+  {
+    "path": "dist/station-activities.js",
+    "bytes": 1597,
+    "sha256": "60a5e6864e000ecafd3b757989eafc8f9655166fb916a89e200db0004ccd5356",
+    "git_blob_sha": "6ba55893b28f366bfc0c42f303182da4a1be176f"
+  },
+  {
+    "path": "dist/station-journey.js",
+    "bytes": 5414,
+    "sha256": "fc041272918d13a6a9edef5330ee3d17a24ef4a60705698d6d6dc41efcaccedb",
+    "git_blob_sha": "261ca1f6a6406e26cae33f755d958883ccf1eda8"
+  },
+  {
+    "path": "dist/style.css",
+    "bytes": 23661,
+    "sha256": "813e3ee98e142f3efa495031373e95c0fd70a5742341a16acf4c53fd61e87873",
+    "git_blob_sha": "927142303f3bf519f1560333173647f225e91689"
+  },
+  {
+    "path": "dist/time-cycle.js",
+    "bytes": 1339,
+    "sha256": "f30ce21f453602a948c260380f70a96f0e8b817a5056bb340c3290e4d8cbbd22",
+    "git_blob_sha": "8ba49058771b2e1819ffb76c544af6a5e32d9ea2"
+  },
+  {
+    "path": "dist/track-bed.js",
+    "bytes": 6390,
+    "sha256": "32a44e557f97bdef981a86ebd1d4d39855093b9da26e8a339cce9564b968d9a6",
+    "git_blob_sha": "c224ccb25ec7ecd4b6ec791ab8a9cc456cb1e253"
+  },
+  {
+    "path": "dist/train-light.js",
+    "bytes": 9095,
+    "sha256": "0b0349aff3c21fc33e8dbbfd0ecf473408205182f0bdc53b879032ae2164f9e4",
+    "git_blob_sha": "3896c32bbd77d8a7ee9e3a8f3d30173947d571dc"
+  },
+  {
+    "path": "dist/train-model.js",
+    "bytes": 24830,
+    "sha256": "3c4322b44750e3aa537970669a3265102058a254f0453c6fb45442eca30e39a1",
+    "git_blob_sha": "fb1a5b36f3976580216f06aa14d41592eac44bf7"
+  },
+  {
+    "path": "dist/train-motion.js",
+    "bytes": 2819,
+    "sha256": "4b9edae8b8d1dc60b4028e5612eb2d0f440038f1bd81e8ff9345130358321a6c",
+    "git_blob_sha": "d578c6d1764d4dd896ffcd80ac2d76c51a247bfd"
+  },
+  {
+    "path": "dist/train-shell.js",
+    "bytes": 9350,
+    "sha256": "5b4cceb18d34034dd852a295f660325b708da3591a56ffb20137ba9e320134e6",
+    "git_blob_sha": "fccbad76fc138cdaa460da419d42436b34609fa9"
+  },
+  {
+    "path": "dist/vendor/BufferGeometryUtils.js",
+    "bytes": 31768,
+    "sha256": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+    "git_blob_sha": "cc3e4ef8ea6f15c52e7cf132b7292632f6dcad10"
+  },
+  {
+    "path": "dist/vendor/OrbitControls.js",
+    "bytes": 32134,
+    "sha256": "80efaadea4f8a636a65fb0bd08bfef62f3d93a0bb94e2e7500f23176c5c07f4e",
+    "git_blob_sha": "7360aab9b347eb677b0ea1a18655c5b86626d29d"
+  },
+  {
+    "path": "dist/vendor/Reflector.js",
+    "bytes": 7043,
+    "sha256": "012ecf98f5fc9bd262871e33d79392a25c04c2573ed68852eb3b8d2d39f9808b",
+    "git_blob_sha": "a175403048733a85775aee0b385ce0a712ea5219"
+  },
+  {
+    "path": "dist/vendor/three.module.js",
+    "bytes": 1314681,
+    "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+    "git_blob_sha": "6bc781491ae24ffd29ee22c8f019cdb67c2c61b7"
+  },
+  {
+    "path": "dist/visual-style.js",
+    "bytes": 10810,
+    "sha256": "0a6d671c2b1591fe16b3957355c5c8058b6df48a834dc82310c4f024b039bb26",
+    "git_blob_sha": "3132abe0dd7dbde4c96ad9d0f91b473dbf1a0842"
+  },
+  {
+    "path": "dist/weather-shelters.js",
+    "bytes": 1100,
+    "sha256": "1cc47bb0407a2cd9927962a6ddcad04fe34b8848618ac4b3026e9e9c9d738e4f",
+    "git_blob_sha": "5b827b13d1b6a9ff123d47c49270ae3cdc85719d"
+  },
+  {
+    "path": "dist/weather.js",
+    "bytes": 5989,
+    "sha256": "026ec0170d33409befa54f19e613a012b0cc5fbf5344e2cfed28424d18e5beb8",
+    "git_blob_sha": "87e2cddec5e750538f184242159e506f58be1e43"
+  },
+  {
+    "path": "dist/wheel-water.js",
+    "bytes": 6485,
+    "sha256": "69c88a8c167459daca373a49df34b10f7ca6f9fcb657e6783c8d36a523cabe36",
+    "git_blob_sha": "77f6cd44ccdfa9cd25eed64ed7b83dc9369decff"
+  },
+  {
+    "path": "package.json",
+    "bytes": 2729,
+    "sha256": "ef575e95953e04abf893a53a51ce6c3b9ef7f41fbb9471931f1b7ecaf9c65fac",
+    "git_blob_sha": "8efdebd97f8cf75f2c31b1311cf39d4d76182b90"
+  },
+  {
+    "path": "scripts/character-shaders.mjs",
+    "bytes": 5131,
+    "sha256": "9aa4ec9bacbde04a9b150b15c3e6c481d2a0f94f27d065c3e5c344afce0cc88e",
+    "git_blob_sha": "e77fe047529adc33179ec10720e2168fd0e43a56"
+  },
+  {
+    "path": "scripts/check-photo-shaders.py",
+    "bytes": 14611,
+    "sha256": "af1578a932f77a4fa2abfd751349ab02deb5c1fe86d2354eba51379f2896a7a1",
+    "git_blob_sha": "e559baa5577c4e0e9b9bf62e6096e122e7635159"
+  },
+  {
+    "path": "scripts/compose-lofi.py",
+    "bytes": 3276,
+    "sha256": "66e64870df836b73c473287d38a0b59d6ad2b07a3591232cfe8c87d33b88842b",
+    "git_blob_sha": "63119628f072d1c3c264a591b11e30fc232b95c4"
+  },
+  {
+    "path": "scripts/graphics-shaders.mjs",
+    "bytes": 11009,
+    "sha256": "8045882ecd4723aa85f3f4d663d561856903c1676b2bf5e524f1b43e2bf1ed3a",
+    "git_blob_sha": "1abe8618af1713112e15d6337a28e06fcf966095"
+  },
+  {
+    "path": "scripts/native-characters.py",
+    "bytes": 6138,
+    "sha256": "79e702282de2c3cd24bc9e03899f99c9fb7e546da3bd6f80a4345ed899ba28eb",
+    "git_blob_sha": "4c5192750f828d5ef532fb2f49a7ec86b6392bac"
+  },
+  {
+    "path": "scripts/native-foliage.py",
+    "bytes": 7459,
+    "sha256": "d98a6452c632bd426d2694102f9d982af9ec894d2bd4798983120457c4745f1d",
+    "git_blob_sha": "5c4b62257b0479c598d8c5b974cce5b9550ca6df"
+  },
+  {
+    "path": "scripts/native-headlight.py",
+    "bytes": 4696,
+    "sha256": "a36941acc026c99d16e6422ce43317ac5b6dc6155778149534e2589d050b6a5b",
+    "git_blob_sha": "da6ad4cf17df6357974ac48e11ff673fe7975722"
+  },
+  {
+    "path": "scripts/native-render-polish.py",
+    "bytes": 6907,
+    "sha256": "780c60975e24d7fdfe84d40f983f7e7b236be3c42884be97f6f2852e13ddcf21",
+    "git_blob_sha": "8d85076ca214a35b0109ec46c9d9cf7efc5e70a0"
+  },
+  {
+    "path": "scripts/native-sea-sky.py",
+    "bytes": 6902,
+    "sha256": "cb1eff577af3b2d9d676230533d7e099a5acbca130acf61205aa4395274a99bf",
+    "git_blob_sha": "4e1f0fec7cdc56ccbd33dd12096a5b1969a6e17b"
+  },
+  {
+    "path": "scripts/verify-photo-png.mjs",
+    "bytes": 3467,
+    "sha256": "6029a10373f57bc79d126f3245174fffe816bb192805fd59b3276b0ae363f42e",
+    "git_blob_sha": "92d2974617b7b417ba858e8af82c09314c1fcc31"
+  },
+  {
+    "path": "scripts/verify-showcase-png.mjs",
+    "bytes": 2261,
+    "sha256": "e80da2f453b0084e540dc6aafd481221f45351c8c64bf035121ba76586c0c6d3",
+    "git_blob_sha": "e06470c9d6ed04f054a036cbdf0a2df5b3737f70"
+  },
+  {
+    "path": "tests/ambience.test.js",
+    "bytes": 3258,
+    "sha256": "1db792b996ec5bb3198bdeefba9874c1fcf89a2eae9367ee36bf5552d077f5c7",
+    "git_blob_sha": "4541c591cd77c5512e73ff72135828b8e615e398"
+  },
+  {
+    "path": "tests/characters.test.js",
+    "bytes": 4240,
+    "sha256": "602cf0e6f3d9c562242a3def5c512e6a863cc338da7ccb0362715a8b8b11b8cc",
+    "git_blob_sha": "efa0147a591d3c754d869db4c407a4e1eae9be8c"
+  },
+  {
+    "path": "tests/control-center.test.js",
+    "bytes": 5214,
+    "sha256": "906f37a2788cb2e5ebc0b0dfe0bedb4251ad990157ed4fa7d6319e10497fdad8",
+    "git_blob_sha": "6633b10fb51e363a855c021f27a7127f1e60577f"
+  },
+  {
+    "path": "tests/graphics.test.js",
+    "bytes": 6309,
+    "sha256": "e75d631564069025c9e4bed76dee89124b6b6653bbaf060a93a6d9cd64c96980",
+    "git_blob_sha": "ab03127a9b871cc2af68e4879119857d522e673c"
+  },
+  {
+    "path": "tests/image-quality.test.js",
+    "bytes": 3598,
+    "sha256": "76be7b89ab889044cc7923b0b610ff1f2b9af9d7b3657f20b98f626d1f9a1f3e",
+    "git_blob_sha": "ec724e2c9ce2988b4661f0854c157b5cca78218a"
+  },
+  {
+    "path": "tests/interactions.test.js",
+    "bytes": 3790,
+    "sha256": "a61ab940c8fc5e9c4272ba3f91c6f1cf2739d521c4ed699ccd55445cf92c7a4b",
+    "git_blob_sha": "6afc057200b27d1a6fc1d3b03a8ed2b938b9219b"
+  },
+  {
+    "path": "tests/journey-expansion.test.js",
+    "bytes": 5841,
+    "sha256": "2b77456785b01cbf3d30597b2b7b9abeb1851b2cb132c141c3abb266b7b2eaca",
+    "git_blob_sha": "76bd56336702e1086798194840c9850c9839e403"
+  },
+  {
+    "path": "tests/journey-onboarding.test.js",
+    "bytes": 8467,
+    "sha256": "702ee658dc567c3ac005ea9d7ae829da0323b5f8e372a5d46f919c1787051bdf",
+    "git_blob_sha": "dd155dbe2db4cce1dacb207d8698b0db06373507"
+  },
+  {
+    "path": "tests/living-world.test.js",
+    "bytes": 4172,
+    "sha256": "2d95425de401f3eb835ed7e0f4a2cd02863d780ab075567a46c9a78e9b4d5496",
+    "git_blob_sha": "c522957ba984ce182fe3cf531e74ed96c97acfe6"
+  },
+  {
+    "path": "tests/motion-camera.test.js",
+    "bytes": 4965,
+    "sha256": "65abde9e3d754e8a7986423e7000fedad5f1a719235e6477e3e5869d8f34c3da",
+    "git_blob_sha": "9e60671008ddffd8bff8ab73cd262db4c336cd55"
+  },
+  {
+    "path": "tests/music.test.js",
+    "bytes": 1780,
+    "sha256": "b4d00a4a69f9650b3ea666b0a1c1c24f2c0e54948764e6513fb7109e5eb8418a",
+    "git_blob_sha": "b9bb26f09e286311788202d36d9810fd32d17035"
+  },
+  {
+    "path": "tests/photo.test.js",
+    "bytes": 9426,
+    "sha256": "5a7903fcd461c483f9bdf258edf2a925e162a06a45d1e70546514cb14c10a13c",
+    "git_blob_sha": "19b6fb6e10f6831bb2e15fcbde3d21abb252c033"
+  },
+  {
+    "path": "tests/physics.test.js",
+    "bytes": 2165,
+    "sha256": "a5866c3bf554e8b1507e9ab7b98cded717cba8ec30502ac7d657514f920f3a6f",
+    "git_blob_sha": "b7527e4ee4f01f43c700dfa2c178e34397d8394a"
+  },
+  {
+    "path": "tests/render-polish.test.js",
+    "bytes": 5257,
+    "sha256": "61f3a8d8a72ea5a60f17795163261871b470241202c79fe06eb484d3be967b8c",
+    "git_blob_sha": "7dfe30739da1fd5a5efff2ba86045689cf9ae5d3"
+  },
+  {
+    "path": "tests/runtime.test.js",
+    "bytes": 40781,
+    "sha256": "da5cdf5f31092b12b584fc3b6cc67a1ce2ad674821ad295f137dcf59f9c6d7dd",
+    "git_blob_sha": "d01e18722a47c9cc41d00f7007b05be80798d910"
+  },
+  {
+    "path": "tests/scenery.test.js",
+    "bytes": 4453,
+    "sha256": "07656aca4c532084ab9df9877aea331a5e0e97073b55c91ff1f403884dae2920",
+    "git_blob_sha": "ab74e7389fdad7a6e2029ed10804862e94a6b506"
+  },
+  {
+    "path": "tests/sea-sky.test.js",
+    "bytes": 3541,
+    "sha256": "11ca4299e8a1ac4bd840756cf69e6d9f207fea0f09966ac6fed5a515c6c89f58",
+    "git_blob_sha": "17435be07a872b82a11c2d127a3ede1f302c1ac6"
+  },
+  {
+    "path": "tests/showcase.test.js",
+    "bytes": 4696,
+    "sha256": "e397e73d327c81515c8f891d871b52d7d32b1fcff1bbd60f5d36d06265f988d7",
+    "git_blob_sha": "7d66da23afb5ee4385dac66fcca4c7c5a43db282"
+  },
+  {
+    "path": "tests/station-life.test.js",
+    "bytes": 5917,
+    "sha256": "e8e818264507aa365e4f5331634d7f8e204d1120685bf8076f74214a5721ea19",
+    "git_blob_sha": "2e3c21e9486ddae9b36d23029423d0d0ebcae1ad"
+  },
+  {
+    "path": "tests/surface-detail.test.js",
+    "bytes": 5099,
+    "sha256": "37acc8f54f10c1668203ac4a86d5674f66c59cf00aae9506194cdbdcb49f2c44",
+    "git_blob_sha": "2da1c368c2f63036e9b10cd01ce09e8be1244199"
+  },
+  {
+    "path": "tests/train-light.test.js",
+    "bytes": 5329,
+    "sha256": "3530632ca77e46aa32665021c1f3353207d9d754c393bbda362e6bb6464e1258",
+    "git_blob_sha": "a7a5a9634f540dca85c3db291cc4fe6e6107ece4"
+  },
+  {
+    "path": "tests/train-shell.test.js",
+    "bytes": 6744,
+    "sha256": "dbb321b44bfc8cefd0b785d00085b0d22d415c617281ae6f6760be12d28a854f",
+    "git_blob_sha": "5f9d40d4519c5d55bf01875178b9568a7387ecdb"
+  },
+  {
+    "path": "tests/train.test.js",
+    "bytes": 5395,
+    "sha256": "5c2cdef6facdf087e90656143409ea49eb63a9b192b533a0422534cb396ae8b2",
+    "git_blob_sha": "8ca72d6171d4ac4caefea2f10ef187ab5d32afa2"
+  },
+  {
+    "path": "tests/water.test.js",
+    "bytes": 2792,
+    "sha256": "7bb4e5d994c6328f499284caff1b68249f781f169d675dbe1d2a85d955a45302",
+    "git_blob_sha": "58efb5150de773c0de969ed93b139dc4f69c4bba"
+  },
+  {
+    "path": "tests/weather-clock.test.js",
+    "bytes": 4158,
+    "sha256": "ba809d70a018dd6a9f53324d51444628b6f41003458f0e1fa2b35fe21305bff7",
+    "git_blob_sha": "9aa1415a6194b5b3472e6b0fbd4440ff6de11e5f"
+  },
+  {
+    "path": "tools/export-single-html.py",
+    "bytes": 5340,
+    "sha256": "d6e8707e3578bfe671de91512d1c60346f919314b9e41b52900b612128e13ffc",
+    "git_blob_sha": "33c1c02985c9449ff6c697ecb88e6a972f6cf7a4"
+  },
+  {
+    "path": "tools/verify-html-export.py",
+    "bytes": 2393,
+    "sha256": "a672e6fbbf227bda361a369fa3ac958e1cabfbfbf19b00f973b6b5306d32dcb4",
+    "git_blob_sha": "aac43abe54c6e887fc4c413a871e1f58b30d5d64"
+  },
+  {
+    "path": "tools/verify-html-modules.mjs",
+    "bytes": 1091,
+    "sha256": "83c4672d69747bea1ddc797fca2ff9924b49f3fbf887905dd86a48e7802af0ec",
+    "git_blob_sha": "612acc5670cfc3769908199e1aa19300be9b6dfc"
+  },
+  {
+    "path": "SOURCE-REVISION.txt",
+    "bytes": 41,
+    "sha256": "229fd2e3ab8dce97729714839120a7f9f92f8047b28d6fcca18c5db934fcdb89",
+    "git_blob_sha": "386b3349bf223c8ab4ebd94299fde46a0d66d6f4"
+  },
+  {
+    "path": "dist/audio/quiet-tide.wav",
+    "bytes": 4704044,
+    "sha256": "e8080112098ea4dfabbe360c2753bb1e92848e8a554e3ec93390076e07638b87",
+    "git_blob_sha": "f9df763036c2bb081b1194825cfab672aef869e6"
+  }
+]

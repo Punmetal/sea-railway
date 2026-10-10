@@ -1,0 +1,6 @@
+/node_modules/
+/.sites-runtime/
+/.env*
+/outputs/
+/.wrangler/
+__pycache__/

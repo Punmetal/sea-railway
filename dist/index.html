@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2a294b"><title>Sea Railway — A quiet journey</title>
+<meta name="description" content="เดินสำรวจรถไฟเหนือทะเล ชมท้องฟ้า และปล่อยให้การเดินทางพาไป">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a294b'/%3E%3Crect x='8' y='5' width='16' height='20' rx='6' fill='%23a8544c'/%3E%3Cpath d='M10 11h12v6H10z' fill='%23f5d7a0'/%3E%3Cpath d='M4 28q6-4 12 0t12 0' fill='none' stroke='%2394c5d4' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/liquid-glass.css">
+<link rel="stylesheet" href="/journey-ui.css">
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+<main id="experience" aria-label="Sea Railway เกมสำรวจรถไฟ 3D">
+<div id="canvas-wrap"></div>
+<header class="ui topbar"><div class="identity"><span class="eyebrow">海の旅 · A QUIET JOURNEY</span><h1>Sea Railway<span class="title-dot">.</span></h1></div></header>
+<div class="control-shell">
+<button id="control-open" class="control-opener" aria-label="เปิด Control Center" title="Control Center" aria-expanded="false" aria-controls="control-center"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></button>
+<div id="control-center" class="control-center" role="region" aria-labelledby="control-title" hidden>
+<div class="control-heading"><div><span class="control-eyebrow">YOUR QUIET JOURNEY</span><h2 id="control-title">Control Center</h2></div><button id="control-close" aria-label="ปิด Control Center">×</button></div>
+<details class="control-section" data-control-section open><summary><span class="section-symbol" aria-hidden="true">◷</span><span>เวลา</span><span class="section-chevron" aria-hidden="true">⌄</span></summary><div class="control-content">
+<div class="times" role="group" aria-label="เลือกช่วงเวลา"><button data-time="day" aria-pressed="false" title="กลางวัน · 1"><span aria-hidden="true">☀</span><span>กลางวัน</span></button><button data-time="evening" class="active" aria-pressed="true" title="ตอนเย็น · 2"><span aria-hidden="true">◒</span><span>ตอนเย็น</span></button><button data-time="night" aria-pressed="false" title="กลางคืน · 3"><span aria-hidden="true">☾</span><span>กลางคืน</span></button></div>
+<button id="time-sync" class="control-switch" role="switch" aria-checked="false" aria-pressed="false"><span>ซิงก์เวลาไทย <small>GMT+7</small></span><span class="switch-track" aria-hidden="true"></span></button>
+<button id="time-lock" class="control-switch" role="switch" aria-checked="false" aria-pressed="false"><span>ล็อกเวลา</span><span class="switch-track" aria-hidden="true"></span></button><output id="time-status" class="control-status" aria-live="polite">ตอนเย็น · เลือกเวลาเอง</output>
+</div></details>
+<details class="control-section" data-control-section><summary><span class="section-symbol" aria-hidden="true">☁</span><span>สภาพอากาศ</span><span class="section-chevron" aria-hidden="true">⌄</span></summary><div class="control-content">
+<div class="panel-section"><div class="weather-choices" role="group" aria-label="เลือกสภาพอากาศ"><button data-weather="clear" aria-pressed="true" class="active">ฟ้าเปิด</button><button data-weather="rain" aria-pressed="false">ฝนบาง ๆ</button><button data-weather="snow" aria-pressed="false">หิมะตก</button><button data-weather="mist" aria-pressed="false">หมอก</button></div></div>
+<label class="panel-choice" for="weather-auto"><span>ให้อากาศค่อย ๆ เปลี่ยน</span><input id="weather-auto" type="checkbox"></label>
+<label class="panel-choice" for="weather-lock"><span>ล็อกอากาศที่เห็นอยู่</span><input id="weather-lock" type="checkbox"></label>
+<output id="weather-status" class="control-status" aria-live="polite">ฟ้าเปิด</output>
+</div></details>
+<details class="control-section" data-control-section><summary><span class="section-symbol" aria-hidden="true">♫</span><span>เสียง</span><span class="section-chevron" aria-hidden="true">⌄</span></summary><div class="control-content control-mixer"><div class="sound-row"><div class="sound-row-title"><label for="ambience-volume">เสียงบรรยากาศ</label><button id="ambience-toggle" aria-pressed="false" aria-label="เปิดเสียงบรรยากาศ" title="เสียงบรรยากาศ · B"><span id="ambience-label">เปิด</span></button></div><div class="sound-level"><input id="ambience-volume" type="range" min="0" max="100" value="45" aria-label="ระดับเสียงบรรยากาศ"><output id="ambience-level" for="ambience-volume">45%</output></div></div>
+<div class="sound-row"><div class="sound-row-title"><label for="train-volume">เสียงรถไฟ</label><button id="train-audio-toggle" aria-pressed="false" aria-label="เปิดเสียงรถไฟ"><span id="train-audio-label">เปิด</span></button></div><div class="sound-level"><input id="train-volume" type="range" min="0" max="100" value="55" aria-label="ระดับเสียงรถไฟ"><output id="train-audio-level" for="train-volume">55%</output></div></div>
+<div class="sound-row"><div class="sound-row-title"><label for="music-volume">เสียงเพลง</label><button id="music-toggle" aria-pressed="false" aria-label="เปิดเพลง lofi" title="เพลง lofi · M"><span id="music-label">เปิด</span></button></div><div class="sound-level"><input id="music-volume" type="range" min="0" max="100" value="25" aria-label="ระดับเสียงเพลง"><output id="music-level" for="music-volume">25%</output></div></div></div></details>
+<details class="control-section" data-control-section><summary><span class="section-symbol" aria-hidden="true">◈</span><span>กล้องและภาพ</span><span class="section-chevron" aria-hidden="true">⌄</span></summary><div class="control-content">
+<button id="cinematic" class="control-switch" aria-pressed="false" aria-label="เปิดกล้อง cinematic"><span>Cinematic Camera <small>กล้องชมวิว · C</small></span><span class="switch-track" aria-hidden="true"></span></button>
+<label class="panel-choice" for="camera-ratio"><span>อัตราส่วน</span><select id="camera-ratio"><option value="free">ตามหน้าจอ</option><option value="16:9">16:9 · แนวนอน</option><option value="21:9">21:9 · ภาพยนตร์</option><option value="3:2">3:2 · ภาพถ่าย</option><option value="4:3">4:3 · คลาสสิก</option><option value="1:1">1:1 · จัตุรัส</option><option value="4:5">4:5 · แนวตั้ง</option><option value="9:16">9:16 · เต็มแนวตั้ง</option></select></label>
+<label class="panel-choice" for="camera-filter"><span>ฟิลเตอร์</span><select id="camera-filter"><option value="original">Original</option><option value="warm">Warm Memory</option><option value="pastel">Pastel Dream</option><option value="film">Film 35mm</option><option value="anime">Anime Cel</option><option value="moonlit">Moonlit Blue</option><option value="rainy">Rainy Window</option><option value="monochrome">Black &amp; White</option></select></label>
+<button id="photo-open" class="control-photo" title="โหมดถ่ายภาพ · P"><span aria-hidden="true">▣</span> เปิดโหมดถ่ายภาพ <span class="key-hint">P</span></button><p class="panel-note">ปรับเลนส์ แสง สี และเอฟเฟกต์เพิ่มเติมในโหมดถ่ายภาพ</p>
+</div></details>
+<details class="control-section" data-control-section><summary><span class="section-symbol" aria-hidden="true">⚙</span><span>ตั้งค่า</span><span class="section-chevron" aria-hidden="true">⌄</span></summary><div class="control-content"><label class="panel-choice" for="auto-stops"><span>แวะสถานีอัตโนมัติ</span><input id="auto-stops" type="checkbox" checked></label>
+<label class="panel-choice" for="quality-select"><span>คุณภาพภาพ</span><select id="quality-select"><option value="low">ต่ำ · เน้นความลื่น</option><option value="medium">กลาง</option><option value="high" selected>สูง</option></select></label>
+<p class="panel-note">จำเวลา อากาศ เสียง คุณภาพภาพ และมุมมองไว้ในเครื่องนี้</p><p id="saved-status" role="status" aria-live="polite">บันทึกเมื่อเปลี่ยนค่า</p>
+<label class="panel-choice" for="journey-hints"><span>คำใบ้ระหว่างเล่น</span><input id="journey-hints" type="checkbox" checked></label>
+<button id="replay-hints" class="journey-action">ดูคำใบ้อีกครั้ง</button><button id="new-journey" class="journey-action">เริ่มการเดินทางใหม่…</button>
+<details class="journey-help"><summary>วิธีเล่นและเก็บภาพ</summary><p>V สลับมุมมอง · WASD เดิน · Shift เดินเร็ว<br>E นั่ง / ลุก / เปิดประตู · C กล้องชมวิว<br>P ถ่ายภาพ · H ซ่อน UI · Esc ปล่อยเมาส์</p><p>เมื่อจอดสถานี เดินผ่านประตูข้างลงฝั่ง ใช้ปุ่มเรียกรถไฟเมื่อพร้อมกลับ</p><div class="showcase-actions"><button id="showcase-gallery" class="journey-action">เก็บภาพเกม 6 มุม · ZIP</button><button id="showcase-video" class="journey-action">บันทึกคลิปชมวิว 15 วินาที</button></div><p class="panel-note">ชุดภาพจัดเวลา อากาศ และมุมให้เอง แล้วคืนจุดเดิม คลิปไม่มีเสียง</p><output id="showcase-status" class="control-status" aria-live="polite"></output></details>
+<output id="journey-save-status" class="control-status" aria-live="polite"></output>
+<button id="hide-ui" class="control-switch" aria-label="ซ่อนปุ่มควบคุม"><span>ซ่อนปุ่มบนหน้าจอ <small>H</small></span><span aria-hidden="true">◌</span></button></div></details>
+</div></div>
+<div class="ui bottom-area"><div class="transport-row"><div class="transport-controls" role="group" aria-label="ควบคุมรถไฟ"><button data-drive="stop" aria-pressed="false">หยุด</button><button data-drive="forward" class="active" aria-pressed="true">เดินหน้า</button><button data-drive="reverse" aria-pressed="false">ถอยหลัง</button></div></div><span id="train-status" role="status" aria-live="polite">เดินหน้า</span><div class="view-switch" role="group" aria-label="มุมมอง"><button id="outside" class="active" aria-pressed="true"><span class="view-icon">◈</span> ชมขบวนรถไฟ</button><button id="inside" aria-pressed="false"><span class="view-icon">⊙</span> เดินในรถไฟ</button></div><p id="controls-hint">ลากเพื่อหมุนมุมมอง · เลื่อนเพื่อซูม · H ซ่อนปุ่ม</p></div>
+<div class="ui journey-caption"><span id="scene-label">夕暮れ</span><span class="caption-line"></span><span id="scene-description">ยามเย็นเหนือทะเล</span></div>
+<button id="interaction-action" class="ui" hidden aria-label="ใช้งานที่นั่งหรือประตู">กด E เพื่อนั่ง</button>
+<div class="ui station-actions"><span id="station-status" role="status" aria-live="polite"></span><div><button id="station-action" hidden>ลงที่สถานี</button><button id="recall-train" hidden>เรียกรถไฟกลับ</button></div></div>
+<canvas id="photo-guides" aria-hidden="true" hidden></canvas>
+<div id="photo-panel" class="photo-panel" role="region" aria-label="โหมดถ่ายภาพ" hidden>
+<div class="panel-heading"><strong>ภาพจากการเดินทาง</strong><div class="photo-header-actions"><button id="photo-panel-toggle" aria-expanded="true" aria-controls="photo-options" aria-label="ย่อแผงถ่ายภาพ" title="ย่อแผง">−</button><button id="photo-close" aria-label="ออกโหมดถ่ายภาพ">×</button></div></div>
+<div id="photo-options" class="photo-options">
+<label class="panel-choice" for="photo-freeze"><span>หยุดฉากไว้</span><input id="photo-freeze" type="checkbox" checked></label>
+<label class="photo-lens" for="photo-fov">มุมเลนส์ <output id="photo-fov-label">48°</output><input id="photo-fov" type="range" min="28" max="95" value="48"></label>
+<label class="panel-choice" for="photo-ratio"><span>อัตราส่วน</span><select id="photo-ratio"><option value="free">ตามหน้าจอ</option><option value="16:9">16:9 · แนวนอน</option><option value="21:9">21:9 · ภาพยนตร์</option><option value="3:2">3:2 · ภาพถ่าย</option><option value="4:3">4:3 · คลาสสิก</option><option value="1:1">1:1 · จัตุรัส</option><option value="4:5">4:5 · แนวตั้ง</option><option value="9:16">9:16 · เต็มแนวตั้ง</option></select></label>
+<div id="photo-crop-controls" hidden><label id="photo-crop-x-row" class="photo-lens" for="photo-crop-x">เลื่อนกรอบซ้าย–ขวา <output id="photo-crop-x-label">0</output><input id="photo-crop-x" type="range" min="-100" max="100" value="0"></label><label id="photo-crop-y-row" class="photo-lens" for="photo-crop-y">เลื่อนกรอบขึ้น–ลง <output id="photo-crop-y-label">0</output><input id="photo-crop-y" type="range" min="-100" max="100" value="0"></label></div>
+<label class="panel-choice" for="photo-grid"><span>กริด Rule of Thirds</span><input id="photo-grid" type="checkbox"></label>
+<label class="panel-choice" for="photo-frame"><span>กรอบภาพ</span><select id="photo-frame"><option value="none">ภาพเต็ม</option><option value="postcard">โปสการ์ด</option></select></label>
+<label class="panel-choice" for="photo-filter"><span>ฟิลเตอร์</span><select id="photo-filter"><option value="original">Original</option><option value="warm">Warm Memory</option><option value="pastel">Pastel Dream</option><option value="film">Film 35mm</option><option value="anime">Anime Cel</option><option value="moonlit">Moonlit Blue</option><option value="rainy">Rainy Window</option><option value="monochrome">Black &amp; White</option></select></label>
+<label class="photo-lens" for="photo-intensity">ความเข้มของฟิลเตอร์ <output id="photo-intensity-label">100%</output><input id="photo-intensity" type="range" min="0" max="100" value="100"></label>
+<details class="photo-details"><summary>แสงและสี</summary>
+<label class="photo-lens" for="photo-exposure">Exposure · ความสว่าง <output id="photo-exposure-label">0 EV</output><input id="photo-exposure" type="range" min="-2" max="2" step="0.05" value="0"></label>
+<label class="photo-lens" for="photo-contrast">Contrast · ความต่างแสง <output id="photo-contrast-label">0</output><input id="photo-contrast" type="range" min="-100" max="100" value="0"></label>
+<label class="photo-lens" for="photo-saturation">Saturation · ความสดสี <output id="photo-saturation-label">0</output><input id="photo-saturation" type="range" min="-100" max="100" value="0"></label>
+<label class="photo-lens" for="photo-temperature">Temperature · เย็น / อุ่น <output id="photo-temperature-label">0</output><input id="photo-temperature" type="range" min="-100" max="100" value="0"></label>
+</details>
+<details class="photo-details"><summary>เอฟเฟกต์ภาพ</summary>
+<label class="photo-lens" for="photo-bloom">Bloom · แสงนุ่ม <output id="photo-bloom-label">0%</output><input id="photo-bloom" type="range" min="0" max="100" value="0"></label>
+<label class="photo-lens" for="photo-grain">Film Grain · เม็ดฟิล์ม <output id="photo-grain-label">0%</output><input id="photo-grain" type="range" min="0" max="100" value="0"></label>
+<label class="photo-lens" for="photo-vignette">Vignette · ขอบภาพ <output id="photo-vignette-label">0%</output><input id="photo-vignette" type="range" min="0" max="100" value="0"></label>
+</details>
+<div class="photo-tools"><button id="photo-compare" aria-pressed="false" title="กดค้างเพื่อเทียบกับภาพเดิม">กดค้างเทียบ Original</button><button id="photo-reset">รีเซ็ต</button></div>
+<p class="panel-note">ลากหมุนกล้อง · เลื่อนซูม · Shift + ลากเลื่อนจุดมอง · สัมผัสสองนิ้วเลื่อน/ซูม · P ออก</p>
+</div>
+<div class="photo-export"><output id="photo-output-size" aria-live="polite"></output><button id="photo-save" class="primary-action">บันทึกภาพ PNG</button><p id="photo-status" role="status" aria-live="polite"></p></div>
+</div>
+<div id="camera-fade" aria-hidden="true"></div>
+<div id="crosshair" aria-hidden="true"></div>
+<div id="look-prompt" hidden><button id="capture-look">คลิกเพื่อมองรอบตัว <span>WASD เดิน · Esc ปล่อยเมาส์</span></button></div>
+<div id="touch-walk" hidden><button data-walk="w" aria-label="เดินหน้า">↑</button><div><button data-walk="a" aria-label="เดินซ้าย">←</button><button data-walk="s" aria-label="เดินถอยหลัง">↓</button><button data-walk="d" aria-label="เดินขวา">→</button></div></div>
+<div id="loading" role="status"><span class="loading-icon">海</span><p>กำลังออกเดินทาง…</p></div>
+<div id="error" hidden role="alert"><h2>ยังเปิดภาพ 3D ไม่ได้</h2><p>ลองเปิดด้วย Chrome, Edge หรือ Safari เวอร์ชันล่าสุด และเปิดการเร่งกราฟิกของเบราว์เซอร์</p><button onclick="location.reload()">ลองอีกครั้ง</button></div>
+</main>
+<div id="journey-start" class="journey-start" role="dialog" aria-modal="true" aria-labelledby="journey-start-title" aria-describedby="journey-start-summary" hidden>
+<div class="journey-start-card"><span class="journey-emblem" aria-hidden="true">海</span><span class="journey-start-eyebrow">A QUIET JOURNEY</span><h2 id="journey-start-title">Sea Railway.</h2><p id="journey-start-summary">รถไฟสองตู้ ทะเลกว้าง และเวลาให้คุณค่อย ๆ มอง</p><div class="journey-start-choices"><label class="journey-start-choice" for="start-quality"><span>คุณภาพภาพ</span><select id="start-quality"><option value="low">เน้นความลื่น</option><option value="medium">สมดุล</option><option value="high">รายละเอียดสูง</option></select></label><label class="journey-start-choice" for="start-sound"><span>เปิดเสียงบรรยากาศและรถไฟ</span><input id="start-sound" type="checkbox"></label></div><button id="journey-start-primary" class="journey-start-primary">ออกเดินทาง</button><button id="journey-start-fresh" class="journey-start-secondary" hidden>เริ่มการเดินทางใหม่</button><button id="journey-start-cancel" class="journey-start-cancel" hidden>กลับไปชมวิว</button><p class="journey-start-footnote">ไม่ต้องรีบ · มีคำใบ้ให้ระหว่างทาง<br>จุดที่เล่นค้างไว้จะบันทึกบนเครื่องนี้</p></div>
+</div>
+<div id="journey-hint" class="journey-hint" role="status" aria-live="polite" hidden><div><strong id="journey-hint-title"></strong><p id="journey-hint-text"></p></div><button id="journey-hint-close" aria-label="ปิดคำใบ้">×</button></div>
+<div id="showcase-progress" class="showcase-progress" hidden><span id="showcase-progress-text" role="status" aria-live="polite"></span><button id="showcase-stop">หยุด</button></div>
+<script type="module" src="/main.js"></script>
+</body></html>
