@@ -16,3 +16,7 @@ Thumbs.db
 /work/
 /Sea-Railway-v*.html
 /Sea-Railway-v*-gallery.zip
+
+# Experimental local browser exports
+/Sea-Railway-sky-validation.html
+/Sea-Railway-webgpu-experiment.html
