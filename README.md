@@ -57,6 +57,10 @@ docs/migration/                Original documentation and file manifest
 
 ## Continue development
 
+### WebGPU experiment
+
+`feat/webgpu-renderer` is a staged, **incomplete** migration. The authored sky has a real r170 WebGPU/TSL parity fixture; the complete game retains original WebGL while remaining effects are migrated. See [architecture audit](docs/webgpu/ARCHITECTURE.md), [migration and rollback instructions](docs/webgpu/MIGRATION.md), and [actual test results](docs/webgpu/RESULTS.md). `?renderer=webgl` forces the original renderer; `?benchmark=1` exposes seven actual full-scene measurements. A request for WebGPU does not override shader compatibility.
+
 Read `AGENTS.md`, `QA.md` and `docs/PROJECT_CONTEXT.md`, then `dist/main.js` and the relevant modules. Preserve the calm atmosphere, train/walking/seating/doors/stations, time/weather/audio, Photo Mode, resume, hints and showcase captures. Run the existing checks after changes and explicitly distinguish CPU/native results from actual browser tests.
 
 The main remaining work is desktop/mobile browser smoke testing, actual WebGL PNG/video downloads, Liquid Glass at small sizes/200% zoom and device performance. These were outstanding in the original handoff and are not claimed as verified by migration.
