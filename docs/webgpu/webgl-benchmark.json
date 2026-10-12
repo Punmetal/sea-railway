@@ -1,0 +1,633 @@
+{
+  "schema": 1,
+  "date": "2026-10-12T19:45:33.935Z",
+  "scope": "complete v31 scene",
+  "requested": "webgpu",
+  "backend": "webgl2",
+  "fallbackReason": "scene-migration-incomplete",
+  "method": "rendered-frame completion intervals; all renderer.info draws accumulated per frame including reflections, shadows and postprocess; no GPU timestamps",
+  "warmupMS": 3000,
+  "sampleMS": 10000,
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      976,
+      868
+    ],
+    "canvas": [
+      976,
+      868
+    ],
+    "devicePixelRatio": 2,
+    "renderScale": 1,
+    "quality": "medium",
+    "threeRevision": "170",
+    "gpuVendor": "Google Inc. (Apple)",
+    "gpuRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Pro, Unspecified Version)",
+    "seedTime": 120,
+    "seedDistance": 70,
+    "trainSpeed": 6.49515331927387,
+    "simulationStep": 0.016666666666666666,
+    "adaptiveResolution": false,
+    "materials": {
+      "materials": 151,
+      "incompatible": [
+        {
+          "object": "painted-sky",
+          "material": "ShaderMaterial",
+          "reason": "glsl-shader"
+        },
+        {
+          "object": "house-detail-b0227e7d-493c-42d1-a65d-da1b3285a675",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-1b32098b-2c38-4ad6-bbb0-5d4c4695a69c",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-504ef6dc-3566-4e28-acad-8055fdf57d47",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-3df9a1fd-144d-4b72-857a-95143daf4724",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-7c6d9a77-f70e-4201-90fa-5fcc0e85a848",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-91e214ce-2e2d-4b09-81ed-40122593da5b",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-b231a957-d2d3-4a5c-baa3-cee2463af658",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "house-detail-ba64d2a8-9574-4dd7-99a2-218194e08233",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "island-individual-leaves",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-stoneDark",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-stone",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-yellow",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelter",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelterDark",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelterRoof",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-houseWalls",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-signalHousing",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-signalLamp",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelterLamp",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-earth",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shore",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-houseWindows",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-bark",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "soft-contact-shadows-70",
+          "material": "ShaderMaterial",
+          "reason": "glsl-shader"
+        },
+        {
+          "object": "scenery-stoneDark",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-stone",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-stoneLight",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-yellow",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-white",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelter",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelterDark",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelterRoof",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-wood",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-houseWalls",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-signalPole",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-signalHousing",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-signalLamp",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "scenery-shelterLamp",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "soft-contact-shadows-1628.8367966257288",
+          "material": "ShaderMaterial",
+          "reason": "glsl-shader"
+        },
+        {
+          "object": "cottage-individual-leaves",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "cottage-detail-7a826e0c-ff92-4029-bdf9-6b5a9c53c6b0",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "cottage-detail-39cbb6de-f5dc-434c-9c68-640b56a3d63b",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "cottage-detail-2aaf40c2-f7e5-4e5b-bdd7-d04621cb0be7",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "cottage-detail-09fac7fe-1f73-4e5d-841c-036215d7f833",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "grove-individual-leaves-0",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "grove-individual-leaves-1",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-crossarm",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-insulators",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-lamps",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-wires",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-shore",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-roof",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "vistas-windows",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "shallow-seabed",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "sea-water",
+          "material": "ShaderMaterial",
+          "reason": "legacy-reflector"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshPhysicalMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-red",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-wall",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-ceiling",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-roof",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-floor",
+          "material": "MeshPhysicalMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-seat",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-bag",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-rib",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-roofPanel",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-lamp",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-straps",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-headlight",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "wood-floor-reflection",
+          "material": "ShaderMaterial",
+          "reason": "legacy-reflector"
+        },
+        {
+          "object": "warm-headlight-volume",
+          "material": "ShaderMaterial",
+          "reason": "glsl-shader"
+        },
+        {
+          "object": "train-wall",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-floor",
+          "material": "MeshPhysicalMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "train-seat",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "wood-floor-reflection",
+          "material": "ShaderMaterial",
+          "reason": "legacy-reflector"
+        },
+        {
+          "object": "warm-headlight-volume",
+          "material": "ShaderMaterial",
+          "reason": "glsl-shader"
+        },
+        {
+          "object": "no-face-cloak",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "chihiro-face",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshPhysicalMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "gentle-rain",
+          "material": "ShaderMaterial",
+          "reason": "glsl-shader"
+        },
+        {
+          "object": "quiet-snow",
+          "material": "ShaderMaterial",
+          "reason": "point-primitive"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "Mesh",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "submerged-gravel-track-bed",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "wheel-ripples",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        },
+        {
+          "object": "wheel-splashes",
+          "material": "MeshStandardMaterial",
+          "reason": "glsl-hook"
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "scenario": "01-day-railway",
+      "frames": 1176,
+      "averageFPS": 117.55297880847661,
+      "onePercentLowFPS": 83.44923507635028,
+      "averageFrameTimeMS": 8.506802721088436,
+      "p99FrameTimeMS": 10.199999988079071,
+      "averageDrawCalls": 678.1488095238095,
+      "minDrawCalls": 652,
+      "maxDrawCalls": 779,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 353
+      }
+    },
+    {
+      "scenario": "02-evening-sea-station",
+      "frames": 987,
+      "averageFPS": 98.60533887473902,
+      "onePercentLowFPS": 83.61204011711148,
+      "averageFrameTimeMS": 10.141438703134792,
+      "p99FrameTimeMS": 11.700000017881393,
+      "averageDrawCalls": 796.0678824721377,
+      "minDrawCalls": 769,
+      "maxDrawCalls": 836,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 353
+      }
+    },
+    {
+      "scenario": "03-night-aurora",
+      "frames": 971,
+      "averageFPS": 97.03595626892034,
+      "onePercentLowFPS": 76.27765061714835,
+      "averageFrameTimeMS": 10.305458290416107,
+      "p99FrameTimeMS": 12.599999994039536,
+      "averageDrawCalls": 814.8558187435633,
+      "minDrawCalls": 797,
+      "maxDrawCalls": 884,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 355
+      }
+    },
+    {
+      "scenario": "05-rain-window",
+      "frames": 1201,
+      "averageFPS": 120.01718814011177,
+      "onePercentLowFPS": 99.69325146083214,
+      "averageFrameTimeMS": 8.332139883435438,
+      "p99FrameTimeMS": 9.599999994039536,
+      "averageDrawCalls": 284.59950041631976,
+      "minDrawCalls": 270,
+      "maxDrawCalls": 367,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 357
+      }
+    },
+    {
+      "scenario": "06-snow-far-tide",
+      "frames": 1200,
+      "averageFPS": 119.99760004814209,
+      "onePercentLowFPS": 99.09165979017862,
+      "averageFrameTimeMS": 8.333499999990066,
+      "p99FrameTimeMS": 9.900000005960464,
+      "averageDrawCalls": 651.0575,
+      "minDrawCalls": 645,
+      "maxDrawCalls": 670,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 358
+      }
+    },
+    {
+      "scenario": "04-quiet-passengers",
+      "frames": 1200,
+      "averageFPS": 119.9928004320456,
+      "onePercentLowFPS": 98.76543202608792,
+      "averageFrameTimeMS": 8.333833333328366,
+      "p99FrameTimeMS": 10,
+      "averageDrawCalls": 514.57,
+      "minDrawCalls": 460,
+      "maxDrawCalls": 543,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 358
+      }
+    },
+    {
+      "scenario": "07-cinematic",
+      "frames": 1201,
+      "averageFPS": 120.01718814011177,
+      "onePercentLowFPS": 99.92313603088122,
+      "averageFrameTimeMS": 8.332139883435438,
+      "p99FrameTimeMS": 9.900000005960464,
+      "averageDrawCalls": 648.7685262281432,
+      "minDrawCalls": 599,
+      "maxDrawCalls": 809,
+      "gpuMemoryBytes": null,
+      "gpuFrameTimeMS": null,
+      "resources": {
+        "textures": 22,
+        "geometries": 360
+      }
+    }
+  ],
+  "issues": [],
+  "visualAccuracy": "Requires captured image review",
+  "stability": "no harness error observed during sample",
+  "gpuMemory": "not available"
+}
