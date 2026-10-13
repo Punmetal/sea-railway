@@ -8,12 +8,12 @@ export function createNoFace(car){
   const group=new THREE.Group();group.name='no-face';
   group.position.set(-.995,1.650,NO_FACE_SEAT.z);group.rotation.y=Math.PI/2;
   group.userData={character:'No-Face',carriage:2,seat:NO_FACE_SEAT.id};car.add(group);
-  const cloak=new THREE.MeshStandardMaterial({color:0x101219,roughness:.92,metalness:0,transparent:true,opacity:.88,depthWrite:false});
+  const cloak=new THREE.MeshStandardMaterial({color:0x0c0d12,roughness:.92,metalness:0,transparent:true,opacity:.91,depthWrite:false});
   const ivory=new THREE.MeshStandardMaterial({color:0xf1ead9,roughness:.82,metalness:0});
   const ink=new THREE.MeshStandardMaterial({color:0x1e1b24,roughness:1});
-  const violet=new THREE.MeshStandardMaterial({color:0x75687d,roughness:1});
+  const violet=new THREE.MeshStandardMaterial({color:0x6c58a6,roughness:.9});
   const hem=FLOOR_TOP-group.position.y;
-  const profile=[[.365,hem],[.378,hem+.025],[.393,hem+.08],[.406,-.30],[.420,-.08],[.410,.085],[.355,.29],[.31,.48],[.285,.78],[.27,1.04],[.245,1.24],[.21,1.40],[.15,1.51],[.075,1.575],[0,1.605]];
+  const profile=[[.40,hem],[.412,hem+.025],[.425,hem+.08],[.436,-.30],[.448,-.08],[.440,.085],[.405,.29],[.375,.48],[.350,.78],[.335,1.04],[.312,1.24],[.262,1.40],[.185,1.51],[.095,1.575],[0,1.605]];
   const bodyGeometry=new THREE.LatheGeometry(new THREE.SplineCurve(profile.map(([r,y])=>new THREE.Vector2(r,y))).getPoints(112),64);
   const p=bodyGeometry.attributes.position;
   for(let i=0;i<p.count;i++){
@@ -22,24 +22,25 @@ export function createNoFace(car){
     // continuous surface drapes over the seat lip rather than adding limbs.
     const front=Math.max(0,z/Math.max(.001,Math.hypot(x,z)));
     const lap=.36*Math.exp(-Math.pow(Math.max(0,y-.07)/.34,2));
-    const backLimit=-.070+.105*Math.min(y,.65);
+    // The back settles against the backrest; above the lap the body is a
+    // full rounded bell rather than a flat front shell.
+    const backLimit=-.135,depth=THREE.MathUtils.lerp(.54,.70,THREE.MathUtils.smoothstep(y,.15,.62));
     p.setXYZ(i,x*fold*.88,y,
-      Math.max(backLimit,z*.54*fold+.035*(1-y/1.605)-y*.022+lap*Math.pow(front,1.3)));
+      Math.max(backLimit,z*depth*fold+.035*(1-y/1.605)-y*.022+lap*Math.pow(front,1.3)));
   }
   bodyGeometry.computeVertexNormals();
   const body=new THREE.Mesh(bodyGeometry,cloak);body.name='no-face-cloak';group.add(body);
-  // The hem rests on the same floor used by walking and carriage geometry.
-  // Small feet remain mostly concealed by the continuous seated drape.
-  const feet=[];for(const side of [-1,1]){const foot=new THREE.SphereGeometry(1,24,16);foot.scale(.08,.017,.075);foot.translate(side*.14,hem+.017,.45);feet.push(foot);}
-  const feetMesh=new THREE.Mesh(mergeGeometries(feet,false),cloak);feetMesh.name='no-face-feet';group.add(feetMesh);feet.forEach(g=>g.dispose());
-  const handsMaterial=new THREE.MeshStandardMaterial({color:0x62616a,roughness:.92,transparent:true,opacity:.84,depthWrite:false}),hands=[];
+  // The hem rests on the same floor used by walking and carriage geometry;
+  // no separate feet show through the translucent drape.
+  const handsMaterial=new THREE.MeshStandardMaterial({color:0x4b4a52,roughness:.92,transparent:true,opacity:.9,depthWrite:false}),hands=[];
   for(const side of [-1,1]){
-    const arm=new THREE.TubeGeometry(new THREE.CatmullRomCurve3([[side*.27,.44,.28],[side*.26,.30,.46],[side*.17,.23,.54]].map(v=>new THREE.Vector3(...v))),20,.017,8,false);hands.push(arm);
+    // Short, thin forearms emerge from the drape and rest the hands on the lap.
+    const arm=new THREE.TubeGeometry(new THREE.CatmullRomCurve3([[side*.215,.33,.36],[side*.20,.26,.47],[side*.17,.23,.54]].map(v=>new THREE.Vector3(...v))),20,.019,8,false);hands.push(arm);
     const palm=new THREE.SphereGeometry(1,20,12);palm.scale(.029,.016,.037);palm.translate(side*.17,.217,.551);hands.push(palm);
     for(let i=0;i<4;i++)hands.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([[side*(.146+i*.014),.217,.55],[side*(.145+i*.014),.185,.584],[side*(.143+i*.014),.166,.58]].map(v=>new THREE.Vector3(...v))),8,.005,6,false));
   }
   const handsMesh=new THREE.Mesh(mergeGeometries(hands,false),handsMaterial);handsMesh.name='no-face-hands';group.add(handsMesh);hands.forEach(g=>g.dispose());
-  const centerY=1.125,centerZ=.186,maskW=.202,maskH=.372,maskD=.073;
+  const centerY=1.115,centerZ=.235,maskW=.232,maskH=.330,maskD=.085;
   const head=new THREE.Group();head.name='no-face-head';head.position.y=centerY;group.add(head);
   const mask=new THREE.Mesh(new THREE.SphereGeometry(1,48,40),ivory);mask.name='no-face-mask';mask.scale.set(maskW,maskH,maskD);mask.position.set(0,0,centerZ);head.add(mask);
   const blackParts=[],purpleParts=[];
@@ -64,12 +65,14 @@ export function createNoFace(car){
     geometry.computeVertexNormals();parts.push(geometry);
   }
   for(const side of [-1,1]){
-    marking(side*.093,.040,.044,.019,blackParts,side*.045);
-    marking(side*.097,-.004,.041,.006,blackParts);
-    marking(side*.112,.159,.040,.073,purpleParts,-side*.11,true);
-    marking(side*.117,-.114,.025,.109,purpleParts,side*.06,true);
+    // Narrow black eyes with a thin lower lid; short purple marks above and
+    // longer tapering ones below, all kept well inside the mask outline.
+    marking(side*.098,.036,.047,.017,blackParts,side*.04);
+    marking(side*.099,.002,.040,.0055,blackParts);
+    marking(side*.099,.118,.020,.050,purpleParts,-side*.04,true);
+    marking(side*.100,-.088,.021,.072,purpleParts,side*.03,true);
   }
-  marking(0,-.264,.064,.015,blackParts);marking(0,-.299,.038,.008,purpleParts);
+  marking(0,-.205,.052,.014,blackParts);marking(0,-.232,.030,.008,purpleParts);
   for(const [parts,material,name]of [[blackParts,ink,'no-face-eyes-mouth'],[purpleParts,violet,'no-face-mask-marks']]){
     const mesh=new THREE.Mesh(mergeGeometries(parts,false),material);mesh.geometry.translate(0,-centerY,0);mesh.name=name;head.add(mesh);parts.forEach(g=>g.dispose());
   }

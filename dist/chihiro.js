@@ -37,13 +37,13 @@ export function createChihiro(car){
  for(const side of [-1,1]){
   // Broad, relaxed half sleeves follow the upper arm instead of horizontal
   // cylinders. Separate fabric bands keep crisp green edges at any angle.
-  const shoulder=[side*.177,1.106,.002],elbow=[side*.265,.765,.078];put(cream,sphere([side*.184,1.091,.006],[.081,.085,.077]));
+  const shoulder=[side*.177,1.106,.002],elbow=[side*.265,.765,.078];put(cream,sphere([side*.180,1.088,.006],[.070,.072,.068]));
   for(const [start,end,mat]of [[0,.33,cream],[.33,.78,green],[.78,1,cream]]){
-   const a=shoulder.map((v,i)=>THREE.MathUtils.lerp(v,elbow[i],start)),b=shoulder.map((v,i)=>THREE.MathUtils.lerp(v,elbow[i],end));put(mat,tube([a,b],THREE.MathUtils.lerp(.078,.081,start),12,20,THREE.MathUtils.lerp(.078,.081,end)));
+   const a=shoulder.map((v,i)=>THREE.MathUtils.lerp(v,elbow[i],start)),b=shoulder.map((v,i)=>THREE.MathUtils.lerp(v,elbow[i],end));put(mat,tube([a,b],THREE.MathUtils.lerp(.067,.074,start),12,20,THREE.MathUtils.lerp(.067,.074,end)));
   }
   put(cream,tube([[side*.259,.77,.014],[side*.275,.747,.07],[side*.253,.77,.145]],.006,14,6));
-  put(skin,sphere([side*.262,.764,.077],[.04,.038,.038]));
-  const wrist=[side*.045,.644,.348];put(skin,tube([[side*.261,.76,.080],[side*.169,.701,.222],wrist],.035,24,12,.024));
+  put(skin,sphere([side*.258,.768,.074],[.036,.034,.034]));
+  const wrist=[side*.045,.644,.348];put(skin,tube([[side*.258,.764,.078],[side*.169,.701,.222],wrist],.037,24,12,.027));
   const handX=side*.039,handY=side<0?.632:.648,handZ=side<0?.363:.343;
   put(skin,sphere([handX,handY,handZ],[.035,.019,.043],-.20));
   for(let finger=0;finger<4;finger++){const x=handX+(finger-1.5)*.010;put(skin,tube([[x,handY,.362],[x-side*.004,handY-.014,.394],[x-side*.009,handY-.036,.405-(finger%3)*.003]],.0058,8,6,.0045));}
@@ -51,12 +51,13 @@ export function createChihiro(car){
   // The short trouser legs extend over the seated thighs; bare knees bend
   // into tapered shins, with both shoes planted on the carriage floor.
   put(pink,tube([[side*.092,.606,.089],[side*.102,.598,.22],[side*.104,.570,.328]],.095,24,20,.079));
-  const hem=new THREE.RingGeometry(.048,.079,40);hem.rotateX(.254);hem.translate(side*.104,.570,.328);put(pinkSeam,hem);
+  const hem=new THREE.RingGeometry(.048,.079,40);hem.rotateX(.254);hem.translate(side*.104,.570,.328);put(pink,hem);
   put(pinkSeam,tube([[side*.178,.563,.318],[side*.110,.527,.346],[side*.026,.556,.331]],.003,14,6));
-  put(skin,sphere([side*.104,.552,.344],[.052,.049,.055]));
-  put(skin,tube([[side*.104,.540,.349],[side*.111,.390,.369],[side*.113,.178,.402]],.043,28,16,.027));
+  put(skin,sphere([side*.104,.548,.346],[.046,.045,.047]));
+  put(skin,tube([[side*.104,.540,.349],[side*.111,.390,.369],[side*.113,.178,.402]],.045,28,16,.031));
   put(sock,tube([[side*.113,.132,.406],[side*.113,.215,.398]],.041,12,16,.043));
-  for(const y of [.153,.175,.198])put(sockFold,tube(Array.from({length:17},(_,j)=>[side*.113+Math.sin(j/16*Math.PI*2)*.043,y+Math.sin(j/16*Math.PI*6)*.0015,.402+Math.cos(j/16*Math.PI*2)*.042]),.0038,24,6));
+  // Loose socks bunch softly at the ankle instead of stacked rings.
+  put(sock,sphere([side*.113,.168,.403],[.050,.034,.049]));put(sockFold,sphere([side*.115,.196,.401],[.047,.022,.046]));
   put(sole,sphere([side*.113,.021,.458],[.076,.021,.132]));
   put(shoe,sphere([side*.113,.074,.458],[.072,.061,.126]));
   put(shoe,sphere([side*.113,.127,.403],[.052,.027,.058]));
@@ -110,17 +111,20 @@ export function createChihiro(car){
  // out at the sea to Chihiro's left. Their feet sit on the real trim top.
  const companions=new THREE.Group();companions.name='window-companions';car.add(companions);
  const mouse=new THREE.Group();mouse.name='boh-mouse';mouse.position.set(-1.297,2.1785,CHIHIRO_SEAT.z+.83);mouse.rotation.y=-Math.PI/2;mouse.userData.character='Boh Mouse';companions.add(mouse);
- const mouseFur=material(0xa4a2ad),mouseInner=material(0xc3a9a7),mouseNose=material(0x6b5e67);
- const mouseBody=new THREE.SphereGeometry(1,28,24),mp=mouseBody.attributes.position;for(let i=0;i<mp.count;i++){const y=mp.getY(i),pear=1-y*.24;mp.setXYZ(i,mp.getX(i)*.068*pear,y*.109+.123,mp.getZ(i)*.062*pear);}mouseBody.computeVertexNormals();
- const mouseParts=[mouseBody,sphere([0,.239,.025],[.049,.060,.053]),sphere([-.047,.295,.021],[.023,.033,.015]),sphere([.047,.295,.021],[.023,.033,.015]),sphere([-.037,.011,.029],[.020,.011,.033]),sphere([.037,.011,.029],[.020,.011,.033])];
+ const mouseFur=material(0xd6d2d6),mouseInner=material(0xd9a2a4),mouseNose=material(0x8a6670);
+ const mouseBody=new THREE.SphereGeometry(1,28,24),mp=mouseBody.attributes.position;for(let i=0;i<mp.count;i++){const y=mp.getY(i),pear=1-y*.24;mp.setXYZ(i,mp.getX(i)*.078*pear,y*.112+.120,mp.getZ(i)*.072*pear);}mouseBody.computeVertexNormals();
+ const mouseParts=[mouseBody,sphere([0,.218,.026],[.056,.058,.058]),sphere([-.037,.266,.008],[.017,.021,.010]),sphere([.037,.266,.008],[.017,.021,.010]),sphere([-.037,.011,.029],[.020,.011,.033]),sphere([.037,.011,.029],[.020,.011,.033])];
  for(const side of [-1,1])mouseParts.push(tube([[side*.059,.170,.014],[side*.076,.127,.029]],.013,12,8,.010));add(mouse,mouseFur,mouseParts,'boh-mouse-fur');
- add(mouse,mouseInner,[sphere([-.047,.296,.033],[.015,.023,.004]),sphere([.047,.296,.033],[.015,.023,.004]),tube([[0,.052,-.057],[.028,.071,-.113],[.081,.081,-.102],[.116,.063,-.084]],.006,28,8,.003)],'boh-mouse-ears-tail');
- add(mouse,eyeInk,[sphere([-.022,.251,.072],[.005,.006,.003]),sphere([.022,.251,.072],[.005,.006,.003])],'boh-mouse-eyes');add(mouse,mouseNose,[sphere([0,.232,.082],[.008,.006,.005])],'boh-mouse-nose');
+ // A long pink tail trails along the sill behind the plump body.
+ add(mouse,mouseInner,[sphere([-.037,.267,.016],[.011,.014,.003]),sphere([.037,.267,.016],[.011,.014,.003]),tube([[0,.045,-.068],[-.026,.060,-.104],[-.075,.074,-.112],[-.130,.066,-.100],[-.170,.046,-.078]],.0065,36,8,.0025)],'boh-mouse-ears-tail');
+ add(mouse,eyeInk,[sphere([-.022,.232,.079],[.005,.006,.003]),sphere([.022,.232,.079],[.005,.006,.003])],'boh-mouse-eyes');add(mouse,mouseNose,[sphere([0,.212,.086],[.008,.006,.005])],'boh-mouse-nose');
  const bird=new THREE.Group();bird.name='haedori-fly-bird';bird.position.set(-1.295,2.1785,CHIHIRO_SEAT.z+.54);bird.rotation.y=-Math.PI/2;bird.userData.character='Haedori';companions.add(bird);
- const birdDark=material(0x34323a),birdLeg=material(0x78634f),wingMaterial=material(0x655e6b,{transparent:true,opacity:.72,depthWrite:false,side:THREE.DoubleSide}),birdParts=[sphere([0,.073,0],[.037,.039,.032])];
- for(let i=0;i<14;i++){const a=i/14*Math.PI*2;birdParts.push(tube([[Math.cos(a)*.025,.09+Math.sin(a)*.025,0],[Math.cos(a)*.048,.09+Math.sin(a)*.041,0]],.0015,4,5,.0003));}add(bird,birdDark,birdParts,'haedori-body-feathers');
+ const birdDark=material(0x34323a),birdLeg=material(0x78634f),wingMaterial=material(0x3d3a44,{transparent:true,opacity:.8,depthWrite:false,side:THREE.DoubleSide}),birdParts=[sphere([0,.073,0],[.037,.039,.032])];
+ // A short crown of wiry feathers on top only, and a small yellow beak.
+ for(let i=0;i<9;i++){const a=Math.PI*(.18+.64*i/8);birdParts.push(tube([[Math.cos(a)*.020,.095+Math.sin(a)*.026,-.004],[Math.cos(a)*.040,.096+Math.sin(a)*.056,-.010]],.0016,4,5,.0004));}add(bird,birdDark,birdParts,'haedori-body-feathers');
+ const beak=new THREE.ConeGeometry(.010,.026,10);beak.rotateX(Math.PI/2);beak.translate(0,.068,.042);add(bird,material(0xd9b33c),[beak],'haedori-beak');
  const legs=[];for(const side of [-1,1]){legs.push(tube([[side*.013,.048,.003],[side*.018,.018,.008],[side*.030,.003,.018]],.002,10,5));legs.push(tube([[side*.018,.012,.008],[side*.031,.003,-.003]],.002,6,5));}add(bird,birdLeg,legs,'haedori-feet');
- const wings=[];for(const side of [-1,1]){const wing=new THREE.Group();wing.position.set(side*.025,.078,-.006);bird.add(wing);const g=sphere([side*.022,.022,-.004],[.014,.035,.003]);g.rotateZ(-side*.6);add(wing,wingMaterial,[g],'haedori-wing');wings.push(wing);}
+ const wings=[];for(const side of [-1,1]){const wing=new THREE.Group();wing.position.set(side*.025,.078,-.006);bird.add(wing);const g=sphere([side*.004,-.004,-.010],[.008,.020,.003]);g.rotateZ(-side*.2);add(wing,wingMaterial,[g],'haedori-wing');wings.push(wing);}
  add(bird,eyeWhite,[sphere([-.013,.084,.027],[.006,.007,.003]),sphere([.013,.084,.027],[.006,.007,.003])],'haedori-eyes');add(bird,eyeInk,[sphere([-.013,.084,.030],[.003,.004,.002]),sphere([.013,.084,.030],[.003,.004,.002])],'haedori-pupils');
  const baseHeadY=head.position.y;
  return {group,head,companions,mouse,bird,materials,update(dt,time,speed){
