@@ -18,6 +18,14 @@ export function createChihiro(car){
   for(let i=0;i<=segments;i++){const center=path.getPointAt(i/segments),r=THREE.MathUtils.lerp(radius,endRadius,i/segments);for(let j=0;j<=radial;j++){const k=i*(radial+1)+j;p.setXYZ(k,center.x+(p.getX(k)-center.x)*r,center.y+(p.getY(k)-center.y)*r,center.z+(p.getZ(k)-center.z)*r);}}
   g.computeVertexNormals();return g;
  };
+ // One continuous surface through each joint: the radius follows a profile
+ // along the limb, so knees and elbows bend without visible ball joints.
+ const limb=(points,profile,segments=40,radial=14)=>{
+  const path=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)),false,'centripetal'),g=new THREE.TubeGeometry(path,segments,1,radial,false),p=g.attributes.position;
+  const radiusAt=t=>{for(let k=1;k<profile.length;k++)if(t<=profile[k][0]){const [t0,r0]=profile[k-1],[t1,r1]=profile[k];return THREE.MathUtils.lerp(r0,r1,THREE.MathUtils.smoothstep(t,t0,t1));}return profile[profile.length-1][1];};
+  for(let i=0;i<=segments;i++){const center=path.getPointAt(i/segments),r=radiusAt(i/segments);for(let j=0;j<=radial;j++){const k=i*(radial+1)+j;p.setXYZ(k,center.x+(p.getX(k)-center.x)*r,center.y+(p.getY(k)-center.y)*r,center.z+(p.getZ(k)-center.z)*r);}}
+  g.computeVertexNormals();return g;
+ };
  function add(parent,mat,parts,name){
   const flat=parts.map(g=>g.index?g.toNonIndexed():g),geometry=mergeGeometries(flat,false);for(const g of new Set([...flat,...parts]))g.dispose();
   geometries.add(geometry);const mesh=new THREE.Mesh(geometry,mat);mesh.name=name;mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;
@@ -29,7 +37,7 @@ export function createChihiro(car){
   for(let j=0;j<segments;j++){const a=j,b=j+1,c=b+segments+1,d=a+segments+1;index.push(a,b,c,a,c,d);}
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(index);g.computeVertexNormals();return g;
  }
- const rings=[{y:.59,x:.198,depth:.13,z:.076},{y:.66,x:.216,depth:.125,z:.05},{y:.78,x:.220,depth:.117,z:.026},{y:.825,x:.217,depth:.112,z:.02},{y:.99,x:.222,depth:.111,z:.013},{y:1.09,x:.218,depth:.10,z:.003},{y:1.155,x:.177,depth:.087,z:.002},{y:1.20,x:.065,depth:.057,z:.013}];
+ const rings=[{y:.59,x:.226,depth:.142,z:.076},{y:.66,x:.230,depth:.132,z:.05},{y:.78,x:.220,depth:.117,z:.026},{y:.825,x:.217,depth:.112,z:.02},{y:.99,x:.222,depth:.111,z:.013},{y:1.09,x:.218,depth:.10,z:.003},{y:1.155,x:.177,depth:.087,z:.002},{y:1.20,x:.065,depth:.057,z:.013}];
  for(let i=0;i<rings.length-1;i++)put((rings[i].y+rings[i+1].y)/2>.825&&(rings[i].y+rings[i+1].y)/2<.99?green:cream,ringSection(rings[i],rings[i+1]));
  put(skin,tube([[0,1.16,.012],[0,1.24,.016]],.056,8,16));
  put(green,tube([[-.064,1.196,.056],[-.041,1.158,.085],[0,1.144,.102],[.041,1.158,.085],[.064,1.196,.056]],.012,28,8));
@@ -42,19 +50,19 @@ export function createChihiro(car){
    const a=shoulder.map((v,i)=>THREE.MathUtils.lerp(v,elbow[i],start)),b=shoulder.map((v,i)=>THREE.MathUtils.lerp(v,elbow[i],end));put(mat,tube([a,b],THREE.MathUtils.lerp(.067,.074,start),12,20,THREE.MathUtils.lerp(.067,.074,end)));
   }
   put(cream,tube([[side*.259,.77,.014],[side*.275,.747,.07],[side*.253,.77,.145]],.006,14,6));
-  put(skin,sphere([side*.258,.768,.074],[.036,.034,.034]));
-  const wrist=[side*.045,.644,.348];put(skin,tube([[side*.258,.764,.078],[side*.169,.701,.222],wrist],.037,24,12,.027));
-  const handX=side*.039,handY=side<0?.632:.648,handZ=side<0?.363:.343;
-  put(skin,sphere([handX,handY,handZ],[.035,.019,.043],-.20));
-  for(let finger=0;finger<4;finger++){const x=handX+(finger-1.5)*.010;put(skin,tube([[x,handY,.362],[x-side*.004,handY-.014,.394],[x-side*.009,handY-.036,.405-(finger%3)*.003]],.0058,8,6,.0045));}
-  put(skin,tube([[handX-side*.025,handY+.005,handZ-.012],[handX-side*.042,handY-.008,handZ+.005],[handX-side*.030,handY-.019,handZ+.018]],.007,10,6,.006));
-  // The short trouser legs extend over the seated thighs; bare knees bend
-  // into tapered shins, with both shoes planted on the carriage floor.
-  put(pink,tube([[side*.092,.606,.089],[side*.102,.598,.22],[side*.104,.570,.328]],.095,24,20,.079));
-  const hem=new THREE.RingGeometry(.048,.079,40);hem.rotateX(.254);hem.translate(side*.104,.570,.328);put(pink,hem);
-  put(pinkSeam,tube([[side*.178,.563,.318],[side*.110,.527,.346],[side*.026,.556,.331]],.003,14,6));
-  put(skin,sphere([side*.104,.548,.346],[.046,.045,.047]));
-  put(skin,tube([[side*.104,.540,.349],[side*.111,.390,.369],[side*.113,.178,.402]],.045,28,16,.031));
+  // Each arm runs from inside the sleeve through the elbow to the wrist.
+  const wrist=[side*.048,.648,.343];
+  put(skin,limb([[side*.205,.97,.030],[side*.256,.774,.076],[side*.200,.716,.196],[side*.122,.676,.292],wrist],[[0,.035],[.32,.033],[.45,.031],[.78,.026],[1,.022]],40,14));
+  // Soft mitten hands clasped over the knees: palm, curled fingers, thumb.
+  const handY=side<0?.632:.650,handZ=side<0?.366:.350;
+  put(skin,sphere([side*.040,handY,handZ],[.030,.017,.034],-.22));
+  put(skin,sphere([side*.038,handY-.020,handZ+.030],[.028,.014,.024],-1.05));
+  put(skin,limb([[side*.020,handY+.004,handZ-.016],[side*.010,handY-.004,handZ+.006],[side*.012,handY-.014,handZ+.020]],[[0,.0085],[1,.0065]],10,8));
+  // Hip to ankle is one surface: thigh, a rounded knee and a slim calf.
+  put(skin,limb([[side*.094,.604,.050],[side*.100,.596,.200],[side*.104,.566,.330],[side*.108,.450,.362],[side*.111,.300,.380],[side*.113,.170,.400]],[[0,.064],[.28,.056],[.40,.049],[.47,.047],[.58,.047],[.82,.035],[1,.030]],56,16));
+  // Short, wide shorts legs end above the knee with a closed hem.
+  put(pink,limb([[side*.090,.608,.040],[side*.098,.600,.150],[side*.101,.596,.222]],[[0,.096],[.6,.088],[1,.086]],16,22));
+  const hem=new THREE.RingGeometry(.052,.086,32);hem.rotateX(.05);hem.translate(side*.101,.596,.222);put(pink,hem);
   put(sock,tube([[side*.113,.132,.406],[side*.113,.215,.398]],.041,12,16,.043));
   // Loose socks bunch softly at the ankle instead of stacked rings.
   put(sock,sphere([side*.113,.168,.403],[.050,.034,.049]));put(sockFold,sphere([side*.115,.196,.401],[.047,.022,.046]));
@@ -72,40 +80,45 @@ export function createChihiro(car){
  const face=new THREE.SphereGeometry(1,48,40),fp=face.attributes.position;
  for(let i=0;i<fp.count;i++){const y=fp.getY(i),jaw=.72+.28*THREE.MathUtils.smoothstep(y,-.85,.05);fp.setXYZ(i,fp.getX(i)*.205*jaw,y*(y<0?.213:.247),fp.getZ(i)*.179+(y<0?y*.012:0));}face.computeVertexNormals();
  add(head,faceMaterial,[face],'chihiro-face');
- faceMaterial.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vChildFace;').replace('#include <begin_vertex>','#include <begin_vertex>\nvChildFace=position;');shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vChildFace;').replace('#include <color_fragment>','#include <color_fragment>\nfloat blush=exp(-pow((abs(vChildFace.x)-.128)/.045,2.)-pow((vChildFace.y+.065)/.031,2.))*smoothstep(.065,.14,vChildFace.z);diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.84,.38,.30),blush*.20);');};faceMaterial.customProgramCacheKey=()=> 'chihiro-soft-cheeks-v1';
+ faceMaterial.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vChildFace;').replace('#include <begin_vertex>','#include <begin_vertex>\nvChildFace=position;');shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vChildFace;').replace('#include <color_fragment>','#include <color_fragment>\nfloat blush=exp(-pow((abs(vChildFace.x)-.128)/.045,2.)-pow((vChildFace.y+.065)/.031,2.))*smoothstep(.065,.14,vChildFace.z);diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.84,.38,.30),blush*.32);');};faceMaterial.customProgramCacheKey=()=> 'chihiro-soft-cheeks-v2';
  add(head,skin,[sphere([-.193,-.022,-.014],[.027,.049,.022]),sphere([.193,-.022,-.014],[.027,.049,.022]),sphere([0,-.034,.178],[.020,.013,.018])],'chihiro-ears-nose');
  const faceZ=(x,y)=>.179*Math.sqrt(Math.max(0,1-(x/.205)**2-(y/(y<0?.213:.247))**2))+(y<0?y*.0563:0);
  const eyes=[];for(const side of [-1,1]){
-  const eye=new THREE.Group();eye.name=side<0?'chihiro-left-eye':'chihiro-right-eye';eye.position.set(side*.077,.035,faceZ(side*.077,.035));head.add(eye);eyes.push(eye);
-  add(eye,eyeWhite,[sphere([0,0,.004],[.028,.021,.009])],'chihiro-eye-white');
-  add(eye,iris,[sphere([side*-.002,-.001,.011],[.019,.020,.004])],'chihiro-brown-iris');
-  add(eye,eyeInk,[sphere([side*-.002,-.001,.015],[.013,.016,.002]),tube([[-.027,.003,.005],[-.014,.020,.009],[.006,.022,.009],[.027,.006,.005]],.0022,18,6)],'chihiro-pupil-upper-lid');
-  add(eye,eyeWhite,[sphere([-.005,.007,.018],[.003,.004,.001])],'chihiro-eye-glint');
+  const eye=new THREE.Group();eye.name=side<0?'chihiro-left-eye':'chihiro-right-eye';eye.position.set(side*.077,.026,faceZ(side*.077,.026));head.add(eye);eyes.push(eye);
+  add(eye,eyeWhite,[sphere([0,0,.004],[.031,.027,.009])],'chihiro-eye-white');
+  add(eye,iris,[sphere([side*-.002,-.002,.011],[.021,.024,.004])],'chihiro-brown-iris');
+  add(eye,eyeInk,[sphere([side*-.002,-.002,.015],[.014,.018,.002]),tube([[-.031,.004,.005],[-.016,.025,.009],[.007,.028,.009],[.031,.008,.005]],.0026,18,6)],'chihiro-pupil-upper-lid');
+  add(eye,eyeWhite,[sphere([-.006,.009,.018],[.004,.005,.001])],'chihiro-eye-glint');
  }
  const brows=[];for(const side of [-1,1])brows.push(tube([[side*.039,.096,faceZ(side*.039,.096)+.004],[side*.074,.106,faceZ(side*.074,.106)+.004],[side*.110,.098,faceZ(side*.110,.098)+.004]],.0036,16,6));add(head,hair,brows,'chihiro-eyebrows');
  add(head,mouth,[tube([[-.024,-.116,faceZ(-.024,-.116)+.003],[0,-.119,faceZ(0,-.119)+.003],[.024,-.116,faceZ(.024,-.116)+.003]],.0024,16,6)],'chihiro-mouth');
- // A continuous scalp with a shaped hairline, followed by individually
- // tapered bangs and side locks. No spherical hair blob covers her face.
- const hp=[],huv=[],hi=[],around=64,down=30;
- for(let i=0;i<=down;i++)for(let j=0;j<=around;j++){const angle=j/around*Math.PI*2,front=Math.max(0,Math.cos(angle)),limit=THREE.MathUtils.lerp(2.72,1.045,Math.pow(front,3)),theta=i/down*limit;hp.push(Math.sin(theta)*Math.sin(angle)*.216,Math.cos(theta)*.263+.007,Math.sin(theta)*Math.cos(angle)*.198-.003);huv.push(j/around,i/down);}
+ // One continuous bob: a crown shell whose lower edge forms a pointed
+ // fringe above the eyes, straight side locks to the jaw and a tight nape
+ // gathered into a short ponytail. Double-sided, so the edge has no holes.
+ const hairShell=material(0x3f2c1f,{side:THREE.DoubleSide,roughness:.72}),ax=.228,ay=.272,az=.214,hy=.008,hz=-.004;
+ const edgeY=(phi,tips=1)=>{
+  const a=Math.abs(phi),tip=Math.pow(.5+.5*Math.cos(phi*17+.4),2)*(.72+.28*Math.sin(phi*5.3+1))*tips,side=Math.pow(.5+.5*Math.cos(phi*11),3)*tips;
+  const fringe=.100-.042*tip,locks=-.160-.022*side,nape=-.128;
+  return a<.80?fringe:a<1.12?THREE.MathUtils.lerp(fringe,locks,THREE.MathUtils.smoothstep(a,.80,1.12)):THREE.MathUtils.lerp(locks,nape,THREE.MathUtils.smoothstep(a,2.15,2.65));
+ };
+ const shellPoint=(phi,y,end)=>{
+  const a=Math.abs(phi),back=THREE.MathUtils.smoothstep(a,2.05,2.6),skull=Math.sqrt(Math.max(0,1-(y/(ay*.97))**2));
+  let h=y>=0?Math.sqrt(Math.max(0,1-(y/ay)**2)):THREE.MathUtils.lerp(1,skull,back);
+  // Side locks curl slightly inward at their ends; fringe tips settle toward the brow.
+  const nearEnd=1-THREE.MathUtils.smoothstep(y,end,end+.06);h*=1-nearEnd*(a<.9?.04:.06)*(1-back);
+  return [Math.sin(phi)*ax*h,y+hy,Math.cos(phi)*az*h+hz];
+ };
+ const hp=[],huv=[],hi=[],around=176,down=40;
+ for(let i=0;i<=down;i++)for(let j=0;j<=around;j++){const phi=(j/around-.5)*Math.PI*2,end=edgeY(phi),base=edgeY(phi,0),v=i/down,y=v<.8?ay-(ay-base)*Math.pow(v/.8,1.15):base-(base-end)*(v-.8)/.2;hp.push(...shellPoint(phi,y,end));huv.push(j/around,v);}
  for(let i=0;i<down;i++)for(let j=0;j<around;j++){const a=i*(around+1)+j,b=a+1,c=b+around+1,d=a+around+1;hi.push(a,d,b,b,d,c);}
  const cap=new THREE.BufferGeometry();cap.setAttribute('position',new THREE.Float32BufferAttribute(hp,3));cap.setAttribute('uv',new THREE.Float32BufferAttribute(huv,2));cap.setIndex(hi);cap.computeVertexNormals();
- function lock(points,width,depth=.007){
-  const path=new THREE.CatmullRomCurve3(points.map(v=>new THREE.Vector3(...v))),p=[],uv=[],indices=[],n=24,r=10;
-  for(let i=0;i<=n;i++){const t=i/n,c=path.getPoint(t),w=width*Math.pow(1-t,.62)+.0003;for(let j=0;j<=r;j++){const a=j/r*Math.PI*2;p.push(c.x+Math.cos(a)*w,c.y,c.z+Math.sin(a)*depth*Math.pow(1-t,.5));uv.push(j/r,t);}}
-  for(let i=0;i<n;i++)for(let j=0;j<r;j++){const a=i*(r+1)+j,b=a+1,c=b+r+1,d=a+r+1;indices.push(a,b,c,a,c,d);}
-  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(indices);g.computeVertexNormals();return g;
- }
- const hairParts=[cap],strokes=[];
- for(let i=0;i<11;i++){const x=(i-5)*.033,endY=[.010,.045,.084,.055,.090,.052,.089,.060,.034,.018,-.011][i],rootX=x*.82,rootZ=.198*Math.sqrt(Math.max(0,1-(rootX/.216)**2-(.198/.263)**2))-.002;
-  const curve=[[rootX,.198,rootZ],[x*.99,.136,faceZ(x*.99,.136)+.018],[x+.005*Math.sin(i*2.7),endY,faceZ(x,endY)+.016]];hairParts.push(lock(curve,.024+(i%2)*.003,.0045));
-  if(i%2===0)strokes.push(tube([curve[0],[curve[1][0]-.004,curve[1][1]+.015,curve[1][2]+.008]],.0015,14,5,.0006));
- }
- for(const side of [-1,1])hairParts.push(lock([[side*.166,.157,.111],[side*.200,-.025,.083],[side*.169,-.205,.069]],.023,.008));
- hairParts.push(sphere([0,-.095,-.184],[.063,.083,.046]));
- for(let i=0;i<7;i++)hairParts.push(lock([[(i-3)*.012,-.11,-.213],[(i-3)*.018,-.226,-.225],[(i-3)*.014,-.286+(i%2)*.025,-.163]],.015,.013));
- add(head,hair,hairParts,'chihiro-fringe-hair-ponytail');add(head,hairHighlight,strokes,'chihiro-hair-strokes');
- add(head,pink,[tube([[-.037,-.157,-.214],[0,-.175,-.23],[.037,-.157,-.214]],.006,14,6)],'chihiro-hair-tie');
+ // Ponytail: a tapered bunch leaving the tie and falling behind the head.
+ const tail=limb([[0,-.030,-.214],[0,-.048,-.258],[0,-.098,-.280],[0,-.160,-.268]],[[0,.040],[.35,.036],[1,.010]],20,14);
+ add(head,hairShell,[cap,tail],'chihiro-bob-hair-ponytail');
+ // A few soft highlight strands follow the crown toward the fringe and locks.
+ const strokes=[];for(const phi of [-1.2,-.62,-.28,.08,.42,.75,1.25]){const end=edgeY(phi),pts=[];for(let k=0;k<=8;k++){const y=ay*.55-(ay*.55-end-.03)*k/8,q=shellPoint(phi,y,end);pts.push([q[0]*1.012,q[1],(q[2]-hz)*1.012+hz]);}strokes.push(tube(pts,.0022,20,5,.0006));}
+ add(head,hairHighlight,strokes,'chihiro-hair-strokes');
+ const tie=new THREE.TorusGeometry(.030,.010,10,24);tie.translate(0,-.030,-.214);add(head,pink,[tie],'chihiro-hair-tie');
 
  // Boh Mouse and the little fly bird share the *inner window sill*, looking
  // out at the sea to Chihiro's left. Their feet sit on the real trim top.
