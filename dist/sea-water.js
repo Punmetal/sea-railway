@@ -54,6 +54,14 @@ vec2 reflectionWeights(vec4 hit,vec3 surface){
  float ridge=.23*exp(-height*.019);
  return vec2(mix(nearby,ridge,distant),distant);
 }
+// The nearest-filtered depth is stretched over many pixels at grazing angles;
+// averaging the classification across neighbouring texels keeps the edges of
+// distant island reflections smooth instead of stair-stepped.
+vec2 smoothReflectionWeights(vec2 uv,vec3 surface){
+ vec2 t=.75/vec2(textureSize(tReflectionDepth,0));
+ return .25*(reflectionWeights(reflectedHit(uv+vec2(-t.x,-t.y)),surface)+reflectionWeights(reflectedHit(uv+vec2(t.x,-t.y)),surface)
+  +reflectionWeights(reflectedHit(uv+vec2(-t.x,t.y)),surface)+reflectionWeights(reflectedHit(uv+vec2(t.x,t.y)),surface));
+}
 float reflectedObjectFade(vec2 uv,vec3 surface){
  return reflectionWeights(reflectedHit(uv),surface).x;
 }
@@ -91,9 +99,11 @@ export function createSeaWater(scene,{coarse=false,palette,shallows}={}){
     vec2 uv=vUv.xy/vUv.w;
     // Perturb the projective coordinates by surface slope, attenuated with
     // distance: windows, clouds and moonlight share the actual scene reflection.
-    float distortion=.021/(1.+distance(cameraPosition,vWorld)*.008);
+    // Slow wind patches leave calm, mirror-like areas between rougher ones.
+    float wind=.55+.75*smoothstep(.25,.8,noiseWater(vWorld.xz*.011+vec2(uTime*.006,-uTime*.004)));
+    float distortion=.7*wind/(1.+distance(cameraPosition,vWorld)*.025);
     uv+=slope*distortion+paintedReflectionRipple(vWorld.xz,uTime,footprint)/(1.+distance(cameraPosition,vWorld)*.005);uv=clamp(uv,vec2(.003),vec2(.997));
-    vec2 weights=reflectionWeights(reflectedHit(uv),vWorld);
+    vec2 weights=smoothReflectionWeights(uv,vWorld);
     float reflectionSoftness=mix(min(.0025,.00065+footprint*.00025),.0032,weights.y);
     vec3 reflected=texture2D(tDiffuse,uv).rgb*.44;
     reflected+=(texture2D(tDiffuse,uv+vec2(reflectionSoftness,0.)).rgb+texture2D(tDiffuse,uv-vec2(reflectionSoftness,0.)).rgb)*.18;
