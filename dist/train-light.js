@@ -62,13 +62,16 @@ export const HEADLIGHT_WATER=`
 uniform vec3 uHeadSource,uHeadColor;uniform vec2 uHeadForward,uHeadShadowTexel;uniform float uHeadStrength,uHeadShadowReady,uHeadTime;uniform mat4 uHeadShadowMatrix;uniform sampler2D uHeadShadow;
 ${HEADLIGHT_OCCLUSION}
 vec3 headlightOnWater(vec3 p,float relief){
- vec2 delta=p.xz-uHeadSource.xz;float along=dot(delta,uHeadForward),across=abs(dot(delta,vec2(uHeadForward.y,-uHeadForward.x)));
- float wave=sin(p.x*.83+p.z*.57-uHeadTime*.42)*.18+sin(p.z*1.6+uHeadTime*.3)*.09;
- float edge=1.-smoothstep(.18,1.,(across+wave)/max(.2,.15+along*.245));
- float range=smoothstep(10.,18.,along)*(1.-smoothstep(24.,40.,along))*exp(-max(0.,along-16.)*.024);
- float broken=.72+.28*sin(p.z*1.12+p.x*.7-uHeadTime*.39)*sin(p.x*.63-p.z*.24+uHeadTime*.21);
+ vec2 delta=p.xz-uHeadSource.xz;float along=dot(delta,uHeadForward),across=dot(delta,vec2(uHeadForward.y,-uHeadForward.x));
+ float spread=max(.8,.15+along*.245);
+ float drift=sin(p.z*.9+p.x*.6-uHeadTime*.4)*.22+sin(p.x*1.7-p.z*1.1+uHeadTime*.27)*.11;
+ float lateral=(across+drift*spread*.35)/spread;
+ float edge=exp(-lateral*lateral*2.6);
+ float range=smoothstep(6.,17.,along)*(1.-smoothstep(26.,44.,along))*exp(-max(0.,along-15.)*.03);
+ float ripple=sin(p.z*1.12+p.x*.7-uHeadTime*.39)*sin(p.x*.63-p.z*.24+uHeadTime*.21);
+ float glitter=smoothstep(-.012,.05,relief);
  float visibility=lampVisibility(vec3(p.x,.055,p.z),uHeadShadow,uHeadShadowMatrix,uHeadShadowTexel,uHeadShadowReady);
- return uHeadColor*edge*range*uHeadStrength*broken*visibility*(.105+clamp(relief,-.04,.055));
+ return uHeadColor*edge*range*uHeadStrength*visibility*(.045+.17*glitter)*(.78+.22*ripple);
 }`;
 
 export function createTrainLights({cars,materials,water,coarse=false}){
